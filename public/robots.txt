@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://ideal-coaching.com/sitemap.xml

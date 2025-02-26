@@ -1,0 +1,61 @@
+{
+  "name": "frontend",
+  "version": "0.1.5",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_ENV=development && next dev -H 0.0.0.0",
+    "build": "next build",
+    "start": "next start",
+    "lint": "biome lint .",
+    "fix:tailwind": "rustywind --write .",
+    "fix": "biome format --write ./src/",
+    "fmt": "pnpm run fix && pnpm run fix:tailwind",
+    "t": "tsc -w"
+  },
+  "dependencies": {
+    "@formatjs/intl-localematcher": "^0.4.2",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.1.5",
+    "@types/negotiator": "^0.6.3",
+    "@types/node": "22.5.5",
+    "@types/qs": "^6.9.16",
+    "@types/react": "18.3.0",
+    "@types/react-dom": "18.3.0",
+    "@vercel/analytics": "^1.2.2",
+    "@vercel/speed-insights": "^1.0.12",
+    "classnames": "^2.5.1",
+    "negotiator": "^0.6.3",
+    "next": "14.2.15",
+    "qs": "^6.12.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-hook-form": "^7.53.0",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.2.1",
+    "react-markdown": "^9.0.1",
+    "react-slideshow-image": "^4.3.1",
+    "remark-gfm": "^4.0.0",
+    "resend": "^4.0.0",
+    "sharp": "^0.33.5",
+    "typescript": "5.4.5",
+    "wretch": "^2.10.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.2",
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.9",
+    "@tailwindcss/line-clamp": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.15",
+    "autoprefixer": "^10.4.20",
+    "eslint-config-next": "14.2.13",
+    "globby": "^14.0.2",
+    "postcss": "^8.4.47",
+    "rustywind": "^0.22.0",
+    "tailwindcss": "^3.4.12"
+  },
+  "engines": {
+    "node": ">=18.17.0 <=24.x.x"
+  },
+  "packageManager": "pnpm@9.15.2"
+}
