@@ -4,8 +4,6 @@ import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
 import { fetchAPI } from "./utils/fetch-api";
 
 import { FALLBACK_SEO } from "@/app/utils/constants";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Toaster } from "react-hot-toast";
 import { i18n } from "../../i18n-config";
@@ -121,7 +119,6 @@ export default async function RootLayout({
 
         <main className="flex flex-col px-4 min-h-screen dark:text-gray-100 dark:bg-black">
           {children}
-          <SpeedInsights />
         </main>
 
         {notificationBanner ? <Banner data={notificationBanner} /> : null}
@@ -134,7 +131,7 @@ export default async function RootLayout({
           legalLinks={footer.legalLinks}
           socialLinks={footer.socialLinks}
         />
-        <Analytics />
+
         <Toaster toastOptions={{ duration: 7000 }} />
       </body>
     </html>
