@@ -7,6 +7,8 @@ frontend:
       - pnpm install --prod
     build:
       commands:
+      # https://docs.aws.amazon.com/amplify/latest/userguide/ssr-environment-variables.html
+      - env | grep -e RESEND_API_KEY >> .env.production
       - pnpm run build
   artifacts:
     baseDirectory: .next
