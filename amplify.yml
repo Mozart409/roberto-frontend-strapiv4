@@ -4,10 +4,10 @@ frontend:
     preBuild:
       commands:
       - corepack enable
-      - pnpm install
+      - pnpm install --prod
     build:
       commands:
-      - pnpm run build --prod
+      - pnpm run build
   artifacts:
     baseDirectory: .next
     files:
