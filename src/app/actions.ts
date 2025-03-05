@@ -4,7 +4,6 @@ import { EmailTemplate } from "@/app/components/email-template";
 import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
 import { z, ZodError } from "zod";
-import { getResendKey } from "./utils/api-keys";
 
 export type FormState = {
   message: string;
@@ -44,7 +43,9 @@ const EmailSchema = z.object({
 
 export type EmailSchema = z.infer<typeof EmailSchema>;
 
-const resend = new Resend(getResendKey());
+console.info("RESEND_API_KEY", process.env.RESEND_API_KEY?.slice(0, 5))
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 type TMessage = {
   type: "error" | "success";
@@ -68,7 +69,7 @@ export async function sendResendEmail(
     const { username, email, phonenumber, subject, message } =
       EmailSchema.parse(formData);
 
-    const plaintext = `Email from ${email}, subject: ${subject}, phone: ${phonenumber}, message: ${message}`;
+    const plaintext = `Email from ${email}, subject: ${subject}, phone: ${phonenumber}, message: ${message.trim()}`;
 
     const { data, error } = await resend.emails.send({
       from: "hallo@ideal-coaching.com",

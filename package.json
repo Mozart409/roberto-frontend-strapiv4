@@ -21,7 +21,6 @@
     "@types/qs": "^6.9.16",
     "@types/react": "18.3.0",
     "@types/react-dom": "18.3.0",
-    "aws-amplify": "^6.13.2",
     "classnames": "^2.5.1",
     "negotiator": "^0.6.3",
     "next": "14.2.21",
@@ -38,21 +37,20 @@
     "sharp": "^0.33.5",
     "typescript": "5.4.5",
     "wretch": "^2.10.0",
-    "zod": "^3.23.8"
-  },
-  "devDependencies": {
-    "@aws-amplify/backend": "^1.14.1",
-    "@biomejs/biome": "1.9.2",
+    "zod": "^3.23.8",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/line-clamp": "^0.4.0",
     "@tailwindcss/typography": "^0.5.15",
     "autoprefixer": "^10.4.20",
+    "tailwindcss": "^3.4.12",
+    "postcss": "^8.4.47"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.2",
     "eslint-config-next": "14.2.13",
     "globby": "^14.0.2",
-    "postcss": "^8.4.47",
-    "rustywind": "^0.22.0",
-    "tailwindcss": "^3.4.12"
+    "rustywind": "^0.22.0"
   },
   "engines": {
     "node": ">=18.17.0 <=24.x.x"
