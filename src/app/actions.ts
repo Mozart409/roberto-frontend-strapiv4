@@ -2,9 +2,9 @@
 
 import { EmailTemplate } from "@/app/components/email-template";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { Resend } from "resend";
 import { z, ZodError } from "zod";
+import { getResendKey } from "./utils/api-keys";
 
 export type FormState = {
   message: string;
@@ -44,7 +44,7 @@ const EmailSchema = z.object({
 
 export type EmailSchema = z.infer<typeof EmailSchema>;
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(getResendKey());
 
 type TMessage = {
   type: "error" | "success";

@@ -27,6 +27,7 @@ export default function FormSubmit({
       return;
     }
 
+    // biome-ignore lint/style/useTemplate: <explanation>
     const res = await fetch(getStrapiURL() + "/api/lead-form-submissions", {
       method: "POST",
       headers: {

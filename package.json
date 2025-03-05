@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "NODE_ENV=development && next dev -H 0.0.0.0",
@@ -21,6 +21,7 @@
     "@types/qs": "^6.9.16",
     "@types/react": "18.3.0",
     "@types/react-dom": "18.3.0",
+    "aws-amplify": "^6.13.2",
     "classnames": "^2.5.1",
     "negotiator": "^0.6.3",
     "next": "14.2.21",
@@ -40,6 +41,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@aws-amplify/backend": "^1.14.1",
     "@biomejs/biome": "1.9.2",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.9",

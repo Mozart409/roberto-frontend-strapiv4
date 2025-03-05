@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 async function getPostBySlug(slug: string) {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-  const path = `/articles`;
+  const path = "/articles";
   const urlParamsObject = {
     filters: { slug },
     populate: {
