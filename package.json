@@ -6,6 +6,7 @@
     "dev": "NODE_ENV=development && next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
+    "prod": "next build && next start",
     "lint": "biome lint .",
     "fix": "biome format --write ./src/",
     "fmt": "pnpm run fix",
@@ -47,7 +48,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "eslint-config-next": "14.2.13",
     "globby": "^14.0.2"
   },
   "engines": {
