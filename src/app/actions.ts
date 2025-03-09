@@ -43,7 +43,7 @@ const EmailSchema = z.object({
 
 export type EmailSchema = z.infer<typeof EmailSchema>;
 
-console.info("RESEND_API_KEY", process.env.RESEND_API_KEY?.slice(0, 5))
+console.info("RESEND_API_KEY", process.env.RESEND_API_KEY?.slice(0, 5));
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
