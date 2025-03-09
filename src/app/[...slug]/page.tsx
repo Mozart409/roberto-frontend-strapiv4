@@ -15,9 +15,6 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page: any = await getPageBySlug(params.slug, params.lang);
 
-  // Debug log (consider removing in production)
-  console.debug("page data length", page.data.length);
-
   // Check if page data is empty or lacks SEO attributes
   if (page.data.length === 0 || !page.data[0]?.attributes?.seo) {
     return FALLBACK_SEO;
