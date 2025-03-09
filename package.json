@@ -1,15 +1,14 @@
 {
   "name": "frontend",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "private": true,
   "scripts": {
     "dev": "NODE_ENV=development && next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
     "lint": "biome lint .",
-    "fix:tailwind": "rustywind --write .",
     "fix": "biome format --write ./src/",
-    "fmt": "pnpm run fix && pnpm run fix:tailwind",
+    "fmt": "pnpm run fix",
     "t": "tsc -w"
   },
   "dependencies": {
@@ -49,8 +48,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.2",
     "eslint-config-next": "14.2.13",
-    "globby": "^14.0.2",
-    "rustywind": "^0.22.0"
+    "globby": "^14.0.2"
   },
   "engines": {
     "node": ">=18.17.0 <=24.x.x"
