@@ -5,14 +5,15 @@ import type { Metadata } from "next";
 
 // Define props type
 type Props = {
-  params: {
+  params: Promise<{
     lang: string;
     slug: string;
-  };
+  }>;
 };
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const page: any = await getPageBySlug(params.slug, params.lang);
 
   // Check if page data is empty or lacks SEO attributes
@@ -28,7 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // Page component
-export default async function PageRoute({ params }: Props) {
+export default async function PageRoute(props: Props) {
+  const params = await props.params;
   const page: any = await getPageBySlug(params.slug, params.lang);
 
   // Return 404 if no page data is found

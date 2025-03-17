@@ -107,7 +107,7 @@ const SingleCard = ({
   );
 };
 
-function GradientHero({ data }: GradientHero): ReactElement {
+function GradientHero({ data }: GradientHero): ReactElement<any> {
   return (
     <div>
       <div className="relative mx-auto max-w-5xl">

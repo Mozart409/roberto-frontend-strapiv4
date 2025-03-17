@@ -2,11 +2,12 @@ import { getPageBySlug } from "@/app/utils/get-page-by-slug";
 import LangRedirect from "./components/LangRedirect";
 import { sectionRenderer } from "./utils/section-renderer";
 
-export default async function RootRoute({
-  params,
-}: {
-  params: { lang: string };
-}) {
+export default async function RootRoute(
+  props: {
+    params: Promise<{ lang: string }>;
+  }
+) {
+  const params = await props.params;
   try {
     const page: any = await getPageBySlug("home", params.lang);
     if (page.error && page.error.status == 401) {

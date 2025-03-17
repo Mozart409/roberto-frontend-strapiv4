@@ -39,11 +39,12 @@ async function getGlobal(lang: string) {
   return await fetchAPI(path, urlParamsObject, options);
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { lang: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: string }>;
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const meta: any = await getGlobal(params.lang);
 
@@ -61,13 +62,18 @@ export async function generateMetadata({
   };
 }
 
-export default async function RootLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { lang: string };
-}) {
+export default async function RootLayout(
+  props: {
+    children: React.ReactNode;
+    params: Promise<{ lang: string }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    children
+  } = props;
+
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const global: any = await getGlobal(params.lang);
   if (!global.data) {
