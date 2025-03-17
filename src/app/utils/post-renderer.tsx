@@ -1,4 +1,4 @@
-import ImageSlider from "../components/ImageSlider";
+
 import Media from "../components/Media";
 import Quote from "../components/Quote";
 import RichText from "../components/RichText";
@@ -8,8 +8,6 @@ export function postRenderer(section: any, index: number) {
   switch (section.__component) {
     case "shared.rich-text":
       return <RichText key={index} data={section} />;
-    case "shared.slider":
-      return <ImageSlider key={index} data={section} />;
     case "shared.quote":
       return <Quote key={index} data={section} />;
     case "shared.media":

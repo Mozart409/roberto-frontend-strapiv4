@@ -78,9 +78,6 @@ importers:
       react-markdown:
         specifier: ^9.0.1
         version: 9.1.0(@types/react@19.0.11)(react@19.0.0)
-      react-slideshow-image:
-        specifier: ^4.3.1
-        version: 4.3.2(react@19.0.0)
       remark-gfm:
         specifier: ^4.0.0
         version: 4.0.1
@@ -443,9 +440,6 @@ packages:
 
   '@tanstack/virtual-core@3.13.2':
     resolution: {integrity: sha512-Qzz4EgzMbO5gKrmqUondCjiHcuu4B1ftHb0pjCut661lXZdGoHeze9f/M8iwsK1t5LGR6aNuNGU7mxkowaW6RQ==}
-
-  '@tweenjs/tween.js@18.6.4':
-    resolution: {integrity: sha512-lB9lMjuqjtuJrx7/kOkqQBtllspPIN+96OvTCeJ2j5FEzinoAXTdAMFnDAQT1KVPRlnYfBrqxtqP66vDM40xxQ==}
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
@@ -1333,11 +1327,6 @@ packages:
   react-promise-suspense@0.3.4:
     resolution: {integrity: sha512-I42jl7L3Ze6kZaq+7zXWSunBa3b1on5yfvUW6Eo/3fFOj6dZ5Bqmcd264nJbTK/gn1HjjILAjSwnZbV4RpSaNQ==}
 
-  react-slideshow-image@4.3.2:
-    resolution: {integrity: sha512-cALXr6RvP7er5QYWcX1ctBvG2x4jvZsgSPMPWUzQG47ZeKZjmXNmN9h8y4tScsWk/7TV23uAFQIESN8kxTaBHQ==}
-    peerDependencies:
-      react: '>=15'
-
   react@19.0.0:
     resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
     engines: {node: '>=0.10.0'}
@@ -1364,9 +1353,6 @@ packages:
   resend@4.1.2:
     resolution: {integrity: sha512-km0btrAj/BqIaRlS+SoLNMaCAUUWEgcEvZpycfVvoXEwAHCxU+vp/ikxPgKRkyKyiR2iDcdUq5uIBTDK9oSSSQ==}
     engines: {node: '>=18'}
-
-  resize-observer-polyfill@1.5.1:
-    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
 
   resolve@1.22.10:
     resolution: {integrity: sha512-NPRy+/ncIMeDlTAsuqwKIiferiawhefFJtkNSW0qZJEqMEb+qBt/77B/jGeeek+F0uOeN05CDa6HXbbIgtVX4w==}
@@ -1866,8 +1852,6 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
 
   '@tanstack/virtual-core@3.13.2': {}
-
-  '@tweenjs/tween.js@18.6.4': {}
 
   '@types/debug@4.1.12':
     dependencies:
@@ -2945,12 +2929,6 @@ snapshots:
     dependencies:
       fast-deep-equal: 2.0.1
 
-  react-slideshow-image@4.3.2(react@19.0.0):
-    dependencies:
-      '@tweenjs/tween.js': 18.6.4
-      react: 19.0.0
-      resize-observer-polyfill: 1.5.1
-
   react@19.0.0: {}
 
   read-cache@1.0.0:
@@ -3001,8 +2979,6 @@ snapshots:
     transitivePeerDependencies:
       - react
       - react-dom
-
-  resize-observer-polyfill@1.5.1: {}
 
   resolve@1.22.10:
     dependencies:

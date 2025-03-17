@@ -9,7 +9,7 @@ export type FormState = {
   message: string;
 };
 
-export const fromErrorToFormState = (error: unknown) => {
+export const fromErrorToFormState = async (error: unknown) => {
   // if validation error with Zod, return first error message
   if (error instanceof ZodError) {
     return {
@@ -88,7 +88,7 @@ export async function sendResendEmail(
         email,
         phonenumber,
         subject,
-      }),
+      }) as React.ReactElement,
     });
     console.info("resend data", data);
     console.error("resend error", error);
@@ -99,6 +99,6 @@ export async function sendResendEmail(
     revalidatePath("/kontakt");
     return { type: "success", message: `Email sent from ${email}` };
   } catch (error) {
-    return { type: "error", message: fromErrorToFormState(error).message };
+    return { type: "error", message: (await fromErrorToFormState(error)).message };
   }
 }
