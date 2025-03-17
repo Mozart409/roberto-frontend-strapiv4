@@ -10,7 +10,8 @@
     "lint": "biome lint .",
     "fix": "biome format --write ./src/",
     "fmt": "pnpm run fix",
-    "t": "tsc -w"
+    "t": "tsc -w",
+    "knip": "knip"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.4.2",
@@ -21,7 +22,6 @@
     "@tailwindcss/line-clamp": "^0.4.0",
     "@tailwindcss/typography": "^0.5.15",
     "@types/negotiator": "^0.6.3",
-    "@types/node": "22.13.10",
     "@types/qs": "^6.9.16",
     "@types/react": "18.3.0",
     "@types/react-dom": "18.3.0",
@@ -42,16 +42,18 @@
     "resend": "^4.0.0",
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.12",
-    "typescript": "5.8.2",
     "wretch": "^2.10.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "globby": "^14.0.2"
+    "@types/node": "22.13.10",
+    "globby": "^14.0.2",
+    "knip": "^5.46.0",
+    "typescript": "5.8.2"
   },
   "engines": {
     "node": ">=18.17.0 <=24.x.x"
   },
-  "packageManager": "pnpm@10.6.1"
+  "packageManager": "pnpm@10.6.4"
 }
