@@ -1,4 +1,4 @@
-import { XCircleIcon } from "@heroicons/react/20/solid";
+import { FiXCircle } from "react-icons/fi";
 import Navbar from "./Navbar";
 
 interface NavLink {
@@ -31,7 +31,7 @@ export default function ErrorPage() {
             <div className="p-4 bg-red-50 rounded-md">
               <div className="flex">
                 <div className="flex-shrink-0">
-                  <XCircleIcon
+                  <FiXCircle
                     className="w-5 h-5 text-red-400"
                     aria-hidden="true"
                   />
