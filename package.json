@@ -47,7 +47,8 @@
     "@cloudflare/next-on-pages": "^1.13.10",
     "@types/node": "22.13.10",
     "knip": "^5.46.0",
-    "typescript": "5.8.2"
+    "typescript": "5.8.2",
+    "wrangler": "^4.1.0"
   },
   "engines": {
     "node": "22.x.x"
