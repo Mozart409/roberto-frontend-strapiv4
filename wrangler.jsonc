@@ -19,12 +19,7 @@
    */
 	"placement": {
 		"mode": "smart"
-	},
-	"tail_consumers": [
-		{
-			"service": "roberto-frontend-strapiv4-tail"
-		}
-	]
+	}
 	/**
    * Bindings
    * Bindings allow your Worker to interact with resources on the Cloudflare Developer Platform, including
