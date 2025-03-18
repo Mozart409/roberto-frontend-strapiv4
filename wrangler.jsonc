@@ -19,6 +19,10 @@
    */
 	"placement": {
 		"mode": "smart"
+	},
+	"vars": {
+		"NEXT_PUBLIC_PAGE_LIMIT": "6",
+		"NEXT_PUBLIC_STRAPI_API_URL": "https://nextjs-strapiv4-cms-production.up.railway.app"
 	}
 	/**
    * Bindings
