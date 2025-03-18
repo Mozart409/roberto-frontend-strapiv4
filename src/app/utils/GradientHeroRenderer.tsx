@@ -1,6 +1,5 @@
 import Markdown from "marked-react";
 
-
 interface MarkDownProps {
   text: string;
 }
