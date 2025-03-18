@@ -1,4 +1,3 @@
-import FormSubmit from "./FormSubmit";
 import { SendEmailForm } from "./SendEmailForm";
 
 interface EmailProps {

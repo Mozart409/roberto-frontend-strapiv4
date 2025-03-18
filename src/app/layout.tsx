@@ -6,7 +6,6 @@ import { fetchAPI } from "./utils/fetch-api";
 import { FALLBACK_SEO } from "@/app/utils/constants";
 
 import { Toaster } from "react-hot-toast";
-import { i18n } from "../../i18n-config";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
