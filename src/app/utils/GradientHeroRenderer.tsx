@@ -8,12 +8,9 @@ interface MarkDownProps {
 export default function GradientHeroRenderer({ text }: MarkDownProps) {
   return (
     <>
-      <Markdown
-        className="mx-auto prose prose-lg prose-headings:underline prose-a:text-primary-600 md:prose-lg lg:prose-2xl"
-        // eslint-disable-next-line
-        children={text}
-        remarkPlugins={[remarkGfm]}
-      />
+      <div className="mx-auto prose prose-lg prose-headings:underline prose-a:text-primary-600 md:prose-lg lg:prose-2xl">
+        <Markdown remarkPlugins={[remarkGfm]}>{text}</Markdown>
+      </div>
     </>
   );
 }

@@ -1,10 +1,8 @@
 "use client";
-import { Dialog } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Dialog, DialogPanel } from "@headlessui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import NextImage from "./elements/image";
 import Logo from "./Logo";
 
 interface NavLink {
@@ -90,7 +88,7 @@ export default function Navbar({
           onClose={setMobileMenuOpen}
         >
           <div className="fixed inset-0 z-50" />
-          <Dialog.Panel className="overflow-y-auto fixed inset-y-0 z-50 py-6 px-6 w-full sm:max-w-sm sm:ring-1 dark:bg-black bg-primary-800 rtl:left-0 ltr:right-0 sm:ring-gray-100/10">
+          <DialogPanel className="overflow-y-auto fixed inset-y-0 z-50 py-6 px-6 w-full sm:max-w-sm sm:ring-1 dark:bg-black bg-primary-800 rtl:left-0 ltr:right-0 sm:ring-gray-100/10">
             <div className="flex justify-between items-center">
               {logoUrl ? (
                 <img className="w-auto h-8" src={logoUrl} alt="Logo" />
@@ -101,7 +99,24 @@ export default function Navbar({
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="sr-only">Close menu</span>
-                <XMarkIcon className="w-6 h-6" aria-hidden="true" />
+                <div className="w-6 h-6" aria-hidden="true">
+                  {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-x"
+                  >
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                  </svg>
+                </div>
               </button>
             </div>
             <div className="flow-root mt-6">
@@ -117,14 +132,32 @@ export default function Navbar({
                 </div>
               </div>
             </div>
-          </Dialog.Panel>
+          </DialogPanel>
         </Dialog>
         <button
           type="button"
           className="p-4 lg:hidden"
           onClick={() => setMobileMenuOpen(true)}
         >
-          <Bars3Icon className="w-7 h-7 text-gray-800" aria-hidden="true" />
+          <div className="w-7 h-7 text-gray-800" aria-hidden="true">
+            {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-menu"
+            >
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
+          </div>
         </button>
       </div>
     </div>

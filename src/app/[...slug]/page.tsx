@@ -11,9 +11,12 @@ type Props = {
   }>;
 };
 
+export const runtime = "edge";
+
 // Generate metadata for SEO
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const page: any = await getPageBySlug(params.slug, params.lang);
 
   // Check if page data is empty or lacks SEO attributes
@@ -31,6 +34,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 // Page component
 export default async function PageRoute(props: Props) {
   const params = await props.params;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const page: any = await getPageBySlug(params.slug, params.lang);
 
   // Return 404 if no page data is found
@@ -43,6 +47,7 @@ export default async function PageRoute(props: Props) {
   }
 
   const contentSections = page.data[0].attributes.contentSections;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   return contentSections.map((section: any, index: number) =>
     sectionRenderer(section, index),
   );

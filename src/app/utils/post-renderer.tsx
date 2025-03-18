@@ -1,9 +1,9 @@
-
 import Media from "../components/Media";
 import Quote from "../components/Quote";
 import RichText from "../components/RichText";
 import VideoEmbed from "../components/VideoEmbed";
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export function postRenderer(section: any, index: number) {
   switch (section.__component) {
     case "shared.rich-text":

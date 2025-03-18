@@ -99,6 +99,9 @@ export async function sendResendEmail(
     revalidatePath("/kontakt");
     return { type: "success", message: `Email sent from ${email}` };
   } catch (error) {
-    return { type: "error", message: (await fromErrorToFormState(error)).message };
+    return {
+      type: "error",
+      message: (await fromErrorToFormState(error)).message,
+    };
   }
 }

@@ -11,6 +11,8 @@ import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
+export const runtime = "edge";
+
 async function getGlobal(lang: string) {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
@@ -39,11 +41,9 @@ async function getGlobal(lang: string) {
   return await fetchAPI(path, urlParamsObject, options);
 }
 
-export async function generateMetadata(
-  props: {
-    params: Promise<{ lang: string }>;
-  }
-): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
   const params = await props.params;
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const meta: any = await getGlobal(params.lang);
@@ -62,17 +62,13 @@ export async function generateMetadata(
   };
 }
 
-export default async function RootLayout(
-  props: {
-    children: React.ReactNode;
-    params: Promise<{ lang: string }>;
-  }
-) {
+export default async function RootLayout(props: {
+  children: React.ReactNode;
+  params: Promise<{ lang: string }>;
+}) {
   const params = await props.params;
 
-  const {
-    children
-  } = props;
+  const { children } = props;
 
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const global: any = await getGlobal(params.lang);
@@ -144,6 +140,6 @@ export default async function RootLayout(
   );
 }
 
-export async function generateStaticParams() {
+/* export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
-}
+} */
