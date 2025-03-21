@@ -1,0 +1,8 @@
+{
+  "ignore": {
+    "next": {
+      "versions": "15.2.3",
+      "reason": "bug with next-on-pages"
+    }
+  }
+}
