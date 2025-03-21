@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import wretch from "wretch";
+
 import { type EmailSchema, sendResendEmail } from "../actions";
 import { renderButtonStyle } from "../utils/render-button-style";
 
@@ -36,7 +36,7 @@ export function SendEmailForm({
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} encType={"application/json"}>
         <div className="space-y-12 max-w-5xl">
           <div className="pb-12 space-y-4 w-full border-b border-gray-900/10">
             <div>
@@ -59,7 +59,6 @@ export function SendEmailForm({
                 />
               </div>
               {errors.email?.type === "required" && (
-                // biome-ignore lint/a11y/useSemanticElements: <explanation>
                 <div role="alert" className="mt-2 text-sm text-red-600">
                   Not a valid email address.
                 </div>
@@ -86,7 +85,6 @@ export function SendEmailForm({
                 />
               </div>
               {errors.subject?.type === "required" && (
-                // biome-ignore lint/a11y/useSemanticElements: <explanation>
                 <div role="alert" className="mt-2 text-sm text-red-600">
                   Not a valid subject.
                 </div>
@@ -102,7 +100,6 @@ export function SendEmailForm({
                 />
               </div>
               {errors.message?.type === "required" && (
-                // biome-ignore lint/a11y/useSemanticElements: <explanation>
                 <div role="alert" className="mt-2 text-sm text-red-600">
                   Not a valid message.
                 </div>

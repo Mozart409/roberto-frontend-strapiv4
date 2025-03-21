@@ -1,6 +1,7 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+export const runtime = "edge";
+
 import { Resend } from "resend";
 import { z, ZodError } from "zod";
 import { EmailTemplate } from "./components/email-template";
@@ -88,7 +89,7 @@ export async function sendResendEmail(
     if (error) {
       return { type: "error", message: error.message };
     }
-    revalidatePath("/kontakt");
+    // revalidatePath("/kontakt");
     return { type: "success", message: `Email sent from ${email}` };
   } catch (error) {
     return {

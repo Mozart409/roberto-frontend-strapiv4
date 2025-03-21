@@ -16,6 +16,12 @@ export default function ErrorPage() {
       newTab: false,
       text: "Home",
     },
+    {
+      id: 2,
+      url: "/kontakt",
+      newTab: false,
+      text: "Kontakt",
+    },
   ];
   return (
     <html lang="en">

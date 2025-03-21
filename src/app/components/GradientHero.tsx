@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Interface_Image from "next/image";
 import Link from "next/link";
 import type { ReactElement } from "react";
 import { getStrapiMedia } from "../utils/api-helpers";
@@ -20,8 +20,8 @@ interface GradientHero {
 
 interface Attributes {
   url: string;
-  alternativeText?: any;
-  caption?: any;
+  alternativeText?: string;
+  caption?: string;
   width: number;
   height: number;
 }
@@ -31,10 +31,6 @@ interface Data {
   attributes: Attributes;
 }
 
-interface Image {
-  data: Data;
-}
-
 interface SeminarCard {
   id: number;
   tilte: string;
@@ -42,7 +38,9 @@ interface SeminarCard {
   category: string;
   url: string;
   newTab: boolean;
-  image: Image;
+  image: {
+    data: Data;
+  };
 }
 
 const SingleCard = ({
@@ -73,7 +71,7 @@ const SingleCard = ({
       >
         <div className="relative flex-shrink-0">
           {imageUrl ? (
-            <Image
+            <Interface_Image
               className="object-cover w-full h-96"
               src={imageUrl}
               width={1000}
@@ -107,17 +105,17 @@ const SingleCard = ({
   );
 };
 
-function GradientHero({ data }: GradientHero): ReactElement<any> {
+function GradientHero({ data }: GradientHero) {
   return (
     <div>
       <div className="relative mx-auto max-w-5xl">
         <div className="relative mx-auto rounded">
           <div className="absolute inset-0 z-0 max-w-7xl h-[85vh]">
-            <div className="cssgradient h-[85vh] lg:h-[75vh] xl:h-[65vh] 2xl:h-[85vh]"></div>
+            <div className="cssgradient h-[85vh] lg:h-[75vh] xl:h-[65vh] 2xl:h-[85vh]" />
           </div>
           <div className="relative m-8">
             <div className="absolute inset-0">
-              <div className="h-1/3 sm:h-2/3"></div>
+              <div className="h-1/3 sm:h-2/3" />
             </div>
             <div className="relative mx-auto max-w-7xl">
               <div className="pt-8 text-center">

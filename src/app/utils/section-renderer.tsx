@@ -6,10 +6,12 @@ import GradientHero from "../components/GradientHero";
 import Heading from "../components/Heading";
 import Hero from "../components/Hero";
 import List from "../components/List";
+import { NextEmailForm } from "../components/NextEmailForm";
 import Pricing from "../components/Pricing";
 import RichText from "../components/RichText";
 import Testimonials from "../components/Testimonials";
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export function sectionRenderer(section: any, index: number) {
   // console.debug(section.__component);
   switch (section.__component) {
@@ -22,7 +24,7 @@ export function sectionRenderer(section: any, index: number) {
     case "sections.pricing":
       return <Pricing key={index} data={section} />;
     case "sections.lead-form":
-      return <Email key={index} data={section} />;
+      return <NextEmailForm key={index} data={section} />;
     case "sections.heading":
       return <Heading key={index} data={section} />;
     case "sections.list":
