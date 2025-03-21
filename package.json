@@ -8,7 +8,7 @@
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "npm run pages:build && npx wrangler pages dev",
     "deploy": "npm run pages:build && npx wrangler pages deploy",
-    "fix": "biome format --write .",
+    "fix": "biome format --write ./src",
     "t": "tsc -w",
     "knip": "knip",
     "upgrade": "npx npm-upgrade"
