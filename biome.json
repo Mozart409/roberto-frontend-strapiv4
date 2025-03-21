@@ -16,11 +16,7 @@
     "indentWidth": 2,
     "lineWidth": 80,
     "lineEnding": "lf",
-    "ignore": [
-      "node_modules/**/*",
-      "dist/**/*",
-      "*.css"
-    ]
+    "ignore": ["node_modules/**/*", "dist/**/*", "*.css"]
   },
   "linter": {
     "enabled": true,
