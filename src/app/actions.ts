@@ -1,9 +1,9 @@
 "use server";
 
-import { EmailTemplate } from "@/app/components/email-template";
 import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
 import { z, ZodError } from "zod";
+import { EmailTemplate } from "./components/email-template";
 
 export type FormState = {
   message: string;
@@ -43,7 +43,7 @@ const EmailSchema = z.object({
 
 export type EmailSchema = z.infer<typeof EmailSchema>;
 
-console.info("RESEND_API_KEY", process.env.RESEND_API_KEY?.slice(0, 5));
+// console.info("RESEND_API_KEY", process.env.RESEND_API_KEY?.slice(0, 5));
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -58,18 +58,10 @@ export async function sendResendEmail(
   console.info("formData", formData);
 
   try {
-    /* const { username, email, phonenumber, subject, message } =
-      EmailSchema.parse({
-        username: formData.get("username") as string,
-        email: formData.get("email") as string,
-        phonenumber: formData.get("phonenumber") as string,
-        subject: formData.get("subject") as string,
-        message: formData.get("message") as string,
-      }); */
     const { username, email, phonenumber, subject, message } =
       EmailSchema.parse(formData);
 
-    const plaintext = `Email from ${email}, subject: ${subject}, phone: ${phonenumber}, message: ${message.trim()}`;
+    const plaintext = `Email from ${username} with email ${email}, subject: ${subject}, phone: ${phonenumber}, message: ${message.trim()}`;
 
     const { data, error } = await resend.emails.send({
       from: "hallo@ideal-coaching.com",
@@ -81,7 +73,7 @@ export async function sendResendEmail(
           value: "strapi_email",
         },
       ],
-      text: plaintext,
+      html: plaintext,
       react: EmailTemplate({
         username,
         message,
