@@ -3,7 +3,7 @@
 import Form from "next/form";
 import { createEmail } from "../email/actions";
 import toast from "react-hot-toast";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { renderButtonStyle } from "../utils/render-button-style";
 
 export const runtime = "edge";
@@ -21,6 +21,7 @@ interface EmailProps {
 
 const initialState = {
   message: "",
+  type: "",
 };
 
 export function NextEmailForm({ data }: { data: EmailProps }) {
@@ -40,13 +41,12 @@ export function NextEmailForm({ data }: { data: EmailProps }) {
         </div>
 
         <Form action={formAction}>
-          {state?.message && (
-            <p className="text-red-500 font-bold text-xl" aria-live="polite">
-              {state.message}
-            </p>
-          )}
-          {state?.message && toast.error(state.message)}
           <div className="mt-2">
+            {state?.message && (
+              <p className="text-black font-bold text-xl" aria-live="polite">
+                {state.message}
+              </p>
+            )}
             <input
               className="block py-1.5 w-full text-gray-900 rounded-md border-0 ring-1 ring-inset ring-gray-300 shadow-sm sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset placeholder:text-gray-400 focus:ring-primary-600"
               type="text"
