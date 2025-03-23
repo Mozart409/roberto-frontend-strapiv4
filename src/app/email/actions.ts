@@ -33,7 +33,7 @@ export async function createEmail(
   console.debug("formData", formData);
 
   if (!parse.success) {
-    return { message: `Schema parse failed ${parse.error}` };
+    return { message: `Schema parse failed ${parse.error}`, type: "error" };
   }
 
   const { username, email, phonenumber, subject, message } = parse.data;
@@ -43,34 +43,36 @@ export async function createEmail(
   const plaintext = `Email from ${username} with email ${email}, subject: ${subject}, phone: ${phonenumber}, message: ${message.trim()}`;
 
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
-    const { data, error } = await resend.emails.send({
-      from: "hallo@ideal-coaching.com",
-      to: ["roberto.morbio@ideal-coaching.de"],
-      subject: subject,
-      tags: [
-        {
-          name: "category",
-          value: "strapi_email",
-        },
-      ],
-      html: plaintext,
-      react: EmailTemplate({
-        username,
-        message,
-        email,
-        phonenumber,
-        subject,
-      }) as React.ReactElement,
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: "hallo@ideal-coaching.com",
+        to: ["roberto.morbio@ideal-coaching.de"],
+        subject: subject,
+        tags: [
+          {
+            name: "category",
+            value: "strapi_email",
+          },
+        ],
+        html: plaintext,
+      }),
     });
 
-    if (error) {
-      return { message: `Failed to send email ${error}` };
+    if (!res.ok) {
+      return { message: `Failed to send email ${res.status}`, type: "error" };
     }
 
-    return { message: `Send email ${data?.id}` };
+    const data = await res.json();
+
+    return { message: `Send email ${data?.id}`, type: "success" };
   } catch (e) {
-    return { message: `Failed to send email ${e}` };
+    return { message: `Failed to send email ${e}`, type: "error" };
   }
 }
