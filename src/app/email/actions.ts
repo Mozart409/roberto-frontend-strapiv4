@@ -1,8 +1,6 @@
 "use server";
-import { redirect } from "next/navigation";
-import { Resend } from "resend";
+
 import { z } from "zod";
-import { EmailTemplate } from "../components/email-template";
 const EmailSchema = z.object({
   username: z.string().min(1, { message: "Name is required" }),
   email: z

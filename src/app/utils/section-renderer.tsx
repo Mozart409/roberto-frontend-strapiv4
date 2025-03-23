@@ -1,5 +1,4 @@
 import ButtonActions from "../components/ButtonActions";
-import Email from "../components/Email";
 import FeatureRowsGroup from "../components/FeatureRowGroup";
 import Features from "../components/Features";
 import GradientHero from "../components/GradientHero";
