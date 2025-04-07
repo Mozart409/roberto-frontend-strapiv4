@@ -1,4 +1,5 @@
 import ButtonActions from "../components/ButtonActions";
+import NextImage from "../components/elements/image";
 import FeatureRowsGroup from "../components/FeatureRowGroup";
 import Features from "../components/Features";
 import GradientHero from "../components/GradientHero";
@@ -8,11 +9,12 @@ import List from "../components/List";
 import { NextEmailForm } from "../components/NextEmailForm";
 import Pricing from "../components/Pricing";
 import RichText from "../components/RichText";
+import SectionImage from "../components/SectionImage";
 import Testimonials from "../components/Testimonials";
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export function sectionRenderer(section: any, index: number) {
-  // console.debug(section.__component);
+  //console.debug(section.__component);
   switch (section.__component) {
     case "sections.hero":
       return <Hero key={index} data={section} />;
@@ -36,6 +38,9 @@ export function sectionRenderer(section: any, index: number) {
       return <ButtonActions key={index} data={section} />;
     case "sections.feature-rows-group":
       return <FeatureRowsGroup key={index} data={section} />;
+    case "sections.image":
+      return <SectionImage key={index} data={section} />;
+
     default:
       return null;
   }
