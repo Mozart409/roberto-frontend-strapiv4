@@ -1,0 +1,84 @@
+vars: {
+  d2-config: {
+    layout-engine: dagre
+  }
+}
+
+direction: down
+
+title: |md
+  # Roberto Archtitektur 
+| {near: top-center}
+
+AmadeusLaptop: {
+  style.3d: true
+  icon: https://icons.terrastruct.com/tech%2Flaptop.svg
+}
+AWS: {
+  S3: {
+    icon: https://www.liblogo.com/img-logo/aw314s096-aws-s3-logo-setting-up-aws-s3-for-open-edx-blog.png
+  }
+  style.fill: orange
+  style.3d: true
+  icon: https://static-00.iconduck.com/assets.00/aws-icon-512x512-4v2f55fn.png
+}
+
+Cloudflare: {
+  Pages: {
+  }
+  Turnstile: {
+  }
+  DNS: {
+    ideal-coaching
+  }
+  DNS.ideal-coaching -> Pages
+  Pages <-> Turnstile
+  style.3d: true
+  style.fill: cyan
+}
+
+Resend: {
+  EmailService
+}
+
+Github: {
+  icon: https://icons.terrastruct.com/dev/github.svg
+  mozart409: {
+    next-strapi-v4
+    roberto-frontend-strapiv4
+  }
+  romo61: {
+    next-strapi-v4
+    roberto-frontend-strapiv4
+  }
+
+  mozart409.next-strapi-v4 -> romo61.next-strapi-v4: Sync
+  mozart409.roberto-frontend-strapiv4 -> romo61.roberto-frontend-strapiv4: Sync
+
+  style.3d: true
+}
+
+Railway: {
+  Postgres.icon: https://icons.terrastruct.com/dev%2Fpostgresql.svg
+  Redis.icon: https://icons.terrastruct.com/dev%2Fredis.svg
+  Strapi.icon: https://canny.io/images/c10da7fa9b0d090bab66799c326e1c91.png
+  Postgres <-> Strapi: Database
+  Redis <-> Strapi: Cache
+  style.3d: true
+  style.fill: pink
+  icon: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSehzVUZnKMbeucrIDnYtFgpI871xxYlf4ZMQr5_CfXKUXk1Ybf&s
+}
+
+Cloudflare.Pages -> Railway.Strapi
+
+Railway.Strapi <-> AWS.S3: Images,Video
+
+Github.romo61.next-strapi-v4 -> Railway.Strapi: Source code von Github
+
+Github.romo61.roberto-frontend-strapiv4 -> Cloudflare.Pages
+Railway.Postgres -> AWS.S3: Database backup each night
+
+Cloudflare.Pages <-> Resend.EmailService
+
+AmadeusLaptop -> Github.mozart409.next-strapi-v4
+AmadeusLaptop -> Github.mozart409.roberto-frontend-strapiv4
