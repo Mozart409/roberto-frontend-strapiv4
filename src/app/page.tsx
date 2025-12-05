@@ -2,8 +2,6 @@ import { getPageBySlug } from "@/app/utils/get-page-by-slug";
 import LangRedirect from "./components/LangRedirect";
 import { sectionRenderer } from "./utils/section-renderer";
 
-;
-
 export default async function RootRoute(props: {
   params: Promise<{ lang: string }>;
 }) {

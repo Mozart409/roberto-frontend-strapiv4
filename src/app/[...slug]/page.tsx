@@ -11,8 +11,6 @@ type Props = {
   }>;
 };
 
-;
-
 // Generate metadata for SEO
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;

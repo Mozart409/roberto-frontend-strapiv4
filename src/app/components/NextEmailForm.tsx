@@ -6,8 +6,6 @@ import toast from "react-hot-toast";
 import { createEmail } from "../email/actions";
 import { renderButtonStyle } from "../utils/render-button-style";
 
-;
-
 interface EmailProps {
   id: string;
   __component: string;
