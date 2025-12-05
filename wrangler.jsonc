@@ -4,9 +4,21 @@
   "name": "roberto-frontend-strapiv4",
   "compatibility_date": "2025-03-17",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+
   "observability": {
-    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "persist": true,
+      "invocation_logs": true,
+    },
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 0.10,
+      "persist": true,
+    },
   },
+
   "placement": {
     "mode": "smart",
   },
