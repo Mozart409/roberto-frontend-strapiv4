@@ -10,8 +10,6 @@ import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
-export const runtime = "edge";
-
 async function getGlobal(lang: string) {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 

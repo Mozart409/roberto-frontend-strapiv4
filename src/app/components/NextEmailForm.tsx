@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { createEmail } from "../email/actions";
 import { renderButtonStyle } from "../utils/render-button-style";
 
-export const runtime = "edge";
+;
 
 interface EmailProps {
   id: string;

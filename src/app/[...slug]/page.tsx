@@ -11,7 +11,7 @@ type Props = {
   }>;
 };
 
-export const runtime = "edge";
+;
 
 // Generate metadata for SEO
 export async function generateMetadata(props: Props): Promise<Metadata> {
