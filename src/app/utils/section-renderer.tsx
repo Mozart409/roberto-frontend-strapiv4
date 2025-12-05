@@ -14,7 +14,7 @@ import Testimonials from "../components/Testimonials";
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export function sectionRenderer(section: any, index: number) {
-  //console.debug(section.__component);
+  // console.debug(section.__component);
   switch (section.__component) {
     case "sections.hero":
       return <Hero key={index} data={section} />;

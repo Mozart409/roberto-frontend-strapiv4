@@ -21,9 +21,7 @@ export default async function RootRoute(props: {
     if (page.data.length === 0) return null;
     const contentSections = page.data[0].attributes.contentSections;
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    return contentSections.map((section: any, index: number) =>
-      sectionRenderer(section, index),
-    );
+    return contentSections.map((section: any, index: number) => sectionRenderer(section, index));
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   } catch (error: any) {
     console.error(error);

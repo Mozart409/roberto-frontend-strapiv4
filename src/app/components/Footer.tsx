@@ -96,9 +96,7 @@ export default function Footer({
             <div className="col-span-6 text-left md:col-span-3">
               <p className="pb-1 text-lg font-medium">Categories</p>
               <ul>
-                {categoryLinks.map((link: CategoryLink) => (
-                  <CategoryLink key={link.id} {...link} />
-                ))}
+                {categoryLinks.map((link: CategoryLink) => <CategoryLink key={link.id} {...link} />)}
               </ul>
             </div>
           )}
@@ -106,9 +104,7 @@ export default function Footer({
           <div className="col-span-6 justify-items-end text-left md:col-span-3">
             <p className="pb-1 text-lg font-medium">Menu</p>
             <ul>
-              {menuLinks.map((link: FooterLink) => (
-                <FooterLink key={link.id} {...link} />
-              ))}
+              {menuLinks.map((link: FooterLink) => <FooterLink key={link.id} {...link} />)}
             </ul>
           </div>
         </div>

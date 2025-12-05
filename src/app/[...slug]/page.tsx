@@ -48,7 +48,5 @@ export default async function PageRoute(props: Props) {
 
   const contentSections = page.data[0].attributes.contentSections;
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  return contentSections.map((section: any, index: number) =>
-    sectionRenderer(section, index),
-  );
+  return contentSections.map((section: any, index: number) => sectionRenderer(section, index));
 }

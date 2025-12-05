@@ -1,9 +1,9 @@
 "use client";
 
 import Form from "next/form";
-import { createEmail } from "../email/actions";
-import toast from "react-hot-toast";
 import { useActionState, useEffect } from "react";
+import toast from "react-hot-toast";
+import { createEmail } from "../email/actions";
 import { renderButtonStyle } from "../utils/render-button-style";
 
 export const runtime = "edge";

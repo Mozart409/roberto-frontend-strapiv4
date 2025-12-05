@@ -75,9 +75,7 @@ export default function Navbar({
 
         <div className="hidden flex-shrink-0 items-center lg:flex">
           <ul className="hidden items-stretch space-x-3 lg:flex">
-            {links.map((item: NavLink) => (
-              <NavLink key={item.id} {...item} />
-            ))}
+            {links.map((item: NavLink) => <NavLink key={item.id} {...item} />)}
           </ul>
         </div>
 
@@ -90,9 +88,7 @@ export default function Navbar({
           <div className="fixed inset-0 z-50" />
           <DialogPanel className="overflow-y-auto fixed inset-y-0 z-50 py-6 px-6 w-full sm:max-w-sm sm:ring-1 dark:bg-black bg-primary-800 rtl:left-0 ltr:right-0 sm:ring-gray-100/10">
             <div className="flex justify-between items-center">
-              {logoUrl ? (
-                <img className="w-auto h-8" src={logoUrl} alt="Logo" />
-              ) : null}
+              {logoUrl ? <img className="w-auto h-8" src={logoUrl} alt="Logo" /> : null}
               <button
                 type="button"
                 className="p-2.5 -m-2.5 text-gray-800 bg-white rounded-md"

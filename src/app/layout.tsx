@@ -110,13 +110,15 @@ export default async function RootLayout(props: {
   return (
     <html lang={params.lang}>
       <body>
-        {navbarLogoUrl ? (
-          <Navbar
-            links={navbar.links}
-            logoUrl={navbarLogoUrl}
-            logoText={navbar.navbarLogo.logoText}
-          />
-        ) : null}
+        {navbarLogoUrl
+          ? (
+            <Navbar
+              links={navbar.links}
+              logoUrl={navbarLogoUrl}
+              logoText={navbar.navbarLogo.logoText}
+            />
+          )
+          : null}
 
         <main className="flex flex-col px-4 min-h-screen dark:text-gray-100 dark:bg-black">
           {children}

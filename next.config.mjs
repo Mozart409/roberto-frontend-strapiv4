@@ -12,8 +12,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname:
-          "s3-images-idealcoachingfargate.s3.eu-central-1.amazonaws.com",
+        hostname: "s3-images-idealcoachingfargate.s3.eu-central-1.amazonaws.com",
       },
       {
         protocol: "https",
