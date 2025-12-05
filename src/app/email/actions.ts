@@ -70,7 +70,7 @@ export async function createEmail(
 
     const data = await res.json();
 
-    return { message: `Send email ${data?.id}`, type: "success" };
+    return { message: `Send email`, type: "success" };
   } catch (e) {
     return { message: `Failed to send email ${e}`, type: "error" };
   }

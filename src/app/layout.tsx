@@ -39,7 +39,6 @@ async function getGlobal(lang: string) {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  // Use default language since root layout doesn't have access to route params
   const lang = "de";
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const meta: any = await getGlobal(lang);
