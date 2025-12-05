@@ -38,12 +38,11 @@ async function getGlobal(lang: string) {
   return await fetchAPI(path, urlParamsObject, options);
 }
 
-export async function generateMetadata(props: {
-  params: Promise<{ lang: string }>;
-}): Promise<Metadata> {
-  const params = await props.params;
+export async function generateMetadata(): Promise<Metadata> {
+  // Use default language since root layout doesn't have access to route params
+  const lang = "de";
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const meta: any = await getGlobal(params.lang);
+  const meta: any = await getGlobal(lang);
 
   if (!meta.data) return FALLBACK_SEO;
 
@@ -61,17 +60,16 @@ export async function generateMetadata(props: {
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
-  params: Promise<{ lang: string }>;
 }) {
-  const params = await props.params;
+  const lang = "de";
 
   const { children } = props;
 
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const global: any = await getGlobal(params.lang);
+  const global: any = await getGlobal(lang);
   if (!global.data) {
     return (
-      <html lang={params.lang}>
+      <html lang={lang}>
         <body>
           <main className="flex flex-col px-4 min-h-screen dark:text-gray-100 dark:bg-black">
             <div className="px-4 sm:px-6 lg:px-8">
@@ -87,7 +85,7 @@ export default async function RootLayout(props: {
 
   if (!navbar || !footer) {
     return (
-      <html lang={params.lang}>
+      <html lang={lang}>
         <body>
           <main className="flex flex-col px-4 min-h-screen dark:text-gray-100 dark:bg-black">
             <div className="px-4 sm:px-6 lg:px-8">{children}</div>
@@ -106,7 +104,7 @@ export default async function RootLayout(props: {
   );
 
   return (
-    <html lang={params.lang}>
+    <html lang={lang}>
       <body>
         {navbarLogoUrl
           ? (
