@@ -44,7 +44,9 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "open-next.config.ts",
+    "worker.ts"
   ],
   "types": [
     "@cloudflare/workers-types/2024-07-29"

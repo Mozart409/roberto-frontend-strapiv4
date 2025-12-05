@@ -1,3 +1,7 @@
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+
+initOpenNextCloudflareForDev();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   allowedDevOrigins: ["local-origin.dev", "*.local-origin.dev", "localhost", "127.0.0.1"],
@@ -19,9 +23,7 @@ const nextConfig = {
       },
     ],
   },
+  trailingSlash: false,
 };
 
 export default nextConfig;
-
-import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
-initOpenNextCloudflareForDev();
