@@ -12,7 +12,7 @@
     "fix": "biome format --write ./src",
     "t": "tsc -w",
     "knip": "knip",
-    "lint": "next lint",
+    "lint": "biome check",
     "postinstall": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
