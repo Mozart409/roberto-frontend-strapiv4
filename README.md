@@ -1,38 +1,96 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Roberto Frontend - Strapi v4
+
+A modern Next.js frontend application integrated with Strapi CMS, featuring internationalization and Cloudflare deployment support.
+
+## Features
+
+- Next.js 15 with App Router
+- Strapi v4 CMS integration
+- Internationalization (i18n) support (English, German)
+- Cloudflare Pages deployment
+- TailwindCSS styling
+- TypeScript
+- Email functionality with Resend
+- Code quality tools (Biome, Knip)
+
+## Prerequisites
+
+- Node.js >= 22.x.x
+- npm or equivalent package manager
+- Strapi CMS backend (v4)
 
 ## Getting Started
 
-First, run the development server:
+### Environment Setup
+
+1. Copy the example environment file:
+
+```bash
+cp .env.example .env
+```
+
+2. Configure the following environment variables:
+
+```bash
+NEXT_PUBLIC_STRAPI_API_TOKEN=your_strapi_api_token
+NEXT_PUBLIC_STRAPI_API_URL=https://your-strapi-url.com
+NEXT_PUBLIC_PAGE_LIMIT=6
+RESEND_API_KEY=your_resend_api_key
+```
+
+### Development
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The dev server runs with Turbopack for faster builds and includes debugging support.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Available Scripts
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- `npm run dev` - Start development server with debugging
+- `npm run build` - Build for production
+- `npm run preview` - Preview Cloudflare build locally
+- `npm run deploy` - Deploy to Cloudflare Pages
+- `npm run upload` - Upload build to Cloudflare
+- `npm run lint` - Run Biome linter
+- `npm run fix` - Format code with Biome
+- `npm run t` - Run TypeScript compiler in watch mode
+- `npm run knip` - Detect unused dependencies and exports
+- `npm run cf-typegen` - Generate Cloudflare types
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── components/     # Reusable components (Hero, Navbar, Footer, etc.)
+│   ├── email/          # Email handling
+│   ├── utils/          # Utility functions and API helpers
+│   └── [...slug]/      # Dynamic routing for CMS pages
+├── middleware.ts       # i18n middleware
+└── i18n-config.ts      # Internationalization configuration
+```
+
+## Deployment
+
+### Cloudflare Workers
+
+Deploy to Cloudflare Workers using:
+
+```bash
+npm run deploy
+```
+
+This project uses [@opennextjs/cloudflare](https://opennext.js.org/cloudflare) for deployment.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Strapi Documentation](https://docs.strapi.io)
+- [OpenNext Cloudflare](https://opennext.js.org/cloudflare)
+- [TailwindCSS](https://tailwindcss.com/docs)
