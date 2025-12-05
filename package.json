@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev --turbopack -H 0.0.0.0",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
+    "@opennextjs/cloudflare": "^1.14.3",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/postcss": "^4.0.15",
@@ -25,7 +26,7 @@
     "autoprefixer": "^10.4.21",
     "classnames": "^2.5.1",
     "marked-react": "^3.0.0",
-    "next": "15.1.7",
+    "next": "15.5.7",
     "qs": "^6.14.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -38,14 +39,13 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@cloudflare/next-on-pages": "^1.13.10",
     "@cloudflare/workers-types": "^4.20250321.0",
     "@types/node": "22.13.11",
     "knip": "^5.46.0",
     "typescript": "5.8.2",
-    "wrangler": "^4.4.0"
+    "wrangler": "^4.53.0"
   },
   "engines": {
-    "node": "22.x.x"
+    "node": ">=22.x.x"
   }
 }
