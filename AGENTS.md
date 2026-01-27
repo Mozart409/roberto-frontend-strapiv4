@@ -12,7 +12,6 @@ nix develop . --command zsh
 
 # The flake provides:
 # - Node.js 24
-# - pnpm package manager
 # - Biome formatter/linter
 # - Wrangler (Cloudflare CLI)
 # - Playwright testing tools
@@ -22,41 +21,41 @@ nix develop . --command zsh
 
 After entering the Nix shell, install dependencies:
 ```bash
-pnpm install  # or use 'ni' shortcut
+npm install
 ```
 
 ## Build, Lint, and Test Commands
 
 ### Development
 ```bash
-pnpm dev              # Start dev server (Turbopack, debugging, host 0.0.0.0)
-pnpm build            # Production build
+npm run dev           # Start dev server (Turbopack, debugging, host 0.0.0.0)
+npm run build         # Production build
 ```
 
 ### Cloudflare Deployment
 ```bash
-pnpm preview          # Local preview of Cloudflare build
-pnpm deploy           # Build and deploy to Cloudflare Pages
-pnpm upload           # Build and upload to Cloudflare Workers
+npm run preview       # Local preview of Cloudflare build
+npm run deploy        # Build and deploy to Cloudflare Pages
+npm run upload        # Build and upload to Cloudflare Workers
 ```
 
 ### Code Quality
 ```bash
-pnpm lint             # Run Biome linter checks
-pnpm fix              # Auto-format code with Biome
-pnpm knip             # Detect unused dependencies and exports
-pnpm t                # TypeScript compiler in watch mode
+npm run lint          # Run Biome linter checks
+npm run fix           # Auto-format code with Biome
+npm run knip          # Detect unused dependencies and exports
+npm run t             # TypeScript compiler in watch mode
 ```
 
 ### Testing
 **NO TESTING FRAMEWORK CURRENTLY CONFIGURED**
 - Playwright is available via Nix flake but not configured
 - To add tests: Configure Playwright or Vitest
-- Run single test (when configured): `pnpm test <filename>`
+- Run single test (when configured): `npm test <filename>`
 
 ### Cloudflare Utilities
 ```bash
-pnpm cf-typegen       # Generate Cloudflare environment types
+npm run cf-typegen    # Generate Cloudflare environment types
 ```
 
 ## Project Architecture
@@ -70,24 +69,6 @@ pnpm cf-typegen       # Generate Cloudflare environment types
 - **Forms**: React Server Actions + Zod validation
 - **Email**: Resend API
 - **HTTP Client**: Wretch
-
-### Directory Structure
-```
-src/
-├── app/
-│   ├── components/          # Reusable UI components
-│   │   ├── elements/        # Basic elements (custom-link, image, video)
-│   │   └── [Components]     # Hero, Navbar, Footer, Features, etc.
-│   ├── email/               # Email handling with server actions
-│   ├── utils/               # Utility functions and helpers
-│   ├── [...slug]/           # Dynamic catch-all routes
-│   ├── api/                 # API routes
-│   ├── layout.tsx           # Root layout
-│   ├── page.tsx             # Home page
-│   ├── error.tsx            # Error boundary
-│   └── globals.css          # Global styles
-└── middleware.ts            # i18n middleware (currently disabled)
-```
 
 ## Code Style Guidelines
 
@@ -171,33 +152,9 @@ import HighlightedText from "./HighlightedText";
 - **Auto-format on save**: Enabled (VSCode)
 - **Pre-commit hook**: Auto-formats staged files
 
-Run `pnpm fix` to format all files.
+Run `npm run fix` to format all files.
 
 ### Components
-
-**Structure Pattern**:
-```typescript
-// 1. Imports
-import { type ReactNode } from "react";
-
-// 2. Type/Interface definitions
-interface ComponentProps {
-  data: {
-    title: string;
-  };
-}
-
-// 3. Main component function
-export default function Component({ data }: ComponentProps) {
-  // Component logic
-  return <div>...</div>;
-}
-
-// 4. Helper/sub-components (if needed)
-function SubComponent() {
-  return <div>...</div>;
-}
-```
 
 **Client vs Server**:
 - **Default**: Server components (no directive)
@@ -233,31 +190,23 @@ if (!data) return <div>404 Content not found!</div>;
 
 ### Data Fetching
 
-**Pattern for Strapi API**:
+**Strapi API Pattern**:
 ```typescript
 async function getData(lang: string) {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
   if (!token) throw new Error("API token missing");
-  
-  const urlParamsObject = {
-    populate: ["field1", "field2"],
-    locale: lang,
-  };
-  
+  const urlParamsObject = { populate: ["field1", "field2"], locale: lang };
   return await fetchAPI(path, urlParamsObject);
 }
 ```
 
-**Dynamic Component Rendering** (factory pattern):
+**Dynamic Component Rendering**:
 ```typescript
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
-    case "sections.hero":
-      return <Hero key={index} data={section} />;
-    case "sections.features":
-      return <Features key={index} data={section} />;
-    default:
-      return null;
+    case "sections.hero": return <Hero key={index} data={section} />;
+    case "sections.features": return <Features key={index} data={section} />;
+    default: return null;
   }
 }
 ```
@@ -280,8 +229,8 @@ RESEND_API_KEY=<your_key>
 - Auto-stages fixed files
 
 **Before Committing**:
-1. Run `pnpm lint` to check for issues
-2. Run `pnpm t` to verify TypeScript compilation
+1. Run `npm run lint` to check for issues
+2. Run `npm run t` to verify TypeScript compilation
 3. Stage your changes
 4. Commit (hook will auto-format)
 
@@ -297,11 +246,7 @@ RESEND_API_KEY=<your_key>
 - Use inline classes (no extraction needed)
 - Dark mode: `dark:` prefix
 - Responsive: `sm:`, `md:`, `lg:`, `xl:` prefixes
-- Conditional classes: Template literals
-
-```typescript
-className={`px-8 py-3 ${isRecommended ? "bg-violet-600" : "bg-gray-800"}`}
-```
+- Conditional classes: `className={\`px-8 py-3 ${isRecommended ? "bg-violet-600" : "bg-gray-800"}\`}`
 
 ### Form Validation (Zod)
 ```typescript
@@ -309,14 +254,13 @@ const Schema = z.object({
   username: z.string().min(1, { message: "Name is required" }),
   email: z.string().email({ message: "Email is not valid" }),
 });
-
 export type EmailSchema = z.infer<typeof Schema>;
 ```
 
 ## Important Notes
 
 - **Node.js Version**: >=22.x.x (provided by Nix flake)
-- **Package Manager**: Use `pnpm` (not npm or yarn)
+- **Package Manager**: Use `npm` (not pnpm or yarn)
 - **State Management**: No global state library (use React hooks/context)
 - **Testing**: Not yet configured (Playwright available in Nix flake)
 - **Deployment Target**: Cloudflare Workers/Pages
