@@ -34,10 +34,10 @@
         buildInputs = with pkgs; [
           nodejs_24
           dprint
-          nodePackages.pnpm
           lazydocker
           ni
           nix-ld
+          biome
           autoPatchelfHook
           # wrangler
           wrangler-flake.packages.${system}.wrangler
@@ -59,8 +59,8 @@
           export PLAYWRIGHT_BROWSERS_PATH="${pkgs.playwright-driver.browsers}"
 
           echo "node: $(node -v)"
-          echo "pnpm: $(pnpm -v)"
-          echo "To install dependencies, run: ni or pnpm install"
+          echo "npm: $(npm -v)"
+          echo "To install dependencies, run: ni or npm install"
 
           # Add user to docker group if not already added
           if ! groups $USER | grep -q docker; then
@@ -72,7 +72,7 @@
       };
 
       packages.default = pkgs.writeShellScriptBin "setup-project" ''
-        pnpm install
+        npm install
       '';
     });
 }

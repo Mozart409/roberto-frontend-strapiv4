@@ -8,7 +8,7 @@
   "observability": {
     "logs": {
       "enabled": true,
-      "head_sampling_rate": 1,
+      "head_sampling_rate": 0.25,
       "persist": true,
       "invocation_logs": true,
     },
