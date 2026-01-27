@@ -45,7 +45,7 @@
     "@types/node": "24.10.1",
     "knip": "^5.71.0",
     "typescript": "5.9.3",
-    "wrangler": "^4.53.0"
+    "wrangler": "^4.59.3"
   },
   "engines": {
     "node": ">=22.x.x"
