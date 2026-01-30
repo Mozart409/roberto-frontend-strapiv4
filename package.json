@@ -13,7 +13,11 @@
     "t": "tsc -w",
     "knip": "knip",
     "lint": "biome check",
-    "postinstall": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "postinstall": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:integration": "vitest run",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
@@ -42,9 +46,12 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.8",
     "@cloudflare/workers-types": "^4.20251205.0",
+    "@playwright/test": "^1.55.0",
     "@types/node": "24.10.1",
     "knip": "^5.71.0",
+    "msw": "^2.11.1",
     "typescript": "5.9.3",
+    "vitest": "^3.2.4",
     "wrangler": "^4.59.3"
   },
   "engines": {
