@@ -2,8 +2,7 @@
   description = "Development environment for a Node.js project";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     wrangler-flake.url = "github:ryand56/wrangler";
     playwright.url = "github:pietdevries94/playwright-web-flake";
@@ -12,7 +11,6 @@
   outputs = {
     self,
     nixpkgs,
-    unstable,
     flake-utils,
     wrangler-flake,
     playwright,
@@ -26,7 +24,6 @@
         config.allowUnfree = true;
         overlays = [overlay];
       };
-      unstablePkgs = import unstable {inherit system;};
     in {
       # to use other shells, run:
       # nix develop . --command fish
@@ -48,6 +45,8 @@
           caddy
           biome
           pkgs.playwright-test
+
+          opencode
         ];
 
         shellHook = ''
