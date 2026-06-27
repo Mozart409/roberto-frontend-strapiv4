@@ -16,46 +16,78 @@
     playwright,
   }:
     flake-utils.lib.eachDefaultSystem (system: let
-      overlay = final: prev: {
-        inherit (playwright.packages.${system}) playwright-test playwright-driver;
-      };
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [overlay];
       };
+
+      upstream = playwright.packages.${system};
+      upstreamDriver = upstream.playwright-driver;
+
+      # Fix the upstream webkit package that fails because autoPatchelfHook
+      # cannot find libenchant-2.so.2.
+      webkitFixed = upstreamDriver.passthru.components.webkit.overrideAttrs (oldAttrs: {
+        buildInputs = oldAttrs.buildInputs ++ [ pkgs.enchant_2 ];
+      });
+
+      # Re-assemble the browsers bundle with the fixed webkit.
+      # The upstream bundle (playwright-driver.browsers) fails because it
+      # depends on the broken webkit derivation. We build our own linkFarm
+      # matching the exact directory structure Playwright expects.
+      browsersJSON = upstreamDriver.passthru.browsersJSON;
+      browsersPath = pkgs.linkFarm "playwright-browsers" [
+        {
+          name = "chromium-${browsersJSON.chromium.revision}";
+          path = upstreamDriver.passthru.components.chromium;
+        }
+        {
+          name = "chromium_headless_shell-${browsersJSON.chromium.revision}";
+          path = upstreamDriver.passthru.components.chromium-headless-shell;
+        }
+        {
+          name = "firefox-${browsersJSON.firefox.revision}";
+          path = upstreamDriver.passthru.components.firefox;
+        }
+        {
+          name = "ffmpeg-${browsersJSON.ffmpeg.revision}";
+          path = upstreamDriver.passthru.components.ffmpeg;
+        }
+        {
+          name = "webkit-${browsersJSON.webkit.revision}";
+          path = webkitFixed;
+        }
+      ];
     in {
-      # to use other shells, run:
-      # nix develop . --command fish
       devShells.default = pkgs.mkShell {
         buildInputs = with pkgs; [
-          nodejs_24
-          dprint
-          lazydocker
-          ni
-          nix-ld
+          # keep-sorted start
           biome
-          autoPatchelfHook
+          caddy
+          claude-code
+          cocogitto
+          dprint
+          enchant_2
+          keep-sorted
+          lefthook
+          ni
+          nodejs_24
+          opencode
+          podman
+          podman-compose
+          podman-tui
+          python3
           # wrangler
           wrangler-flake.packages.${system}.wrangler
-          docker
-          docker-compose
-          lazydocker
-          python3
-          caddy
-          biome
-          pkgs.playwright-test
-
-          opencode
+          # keep-sorted end
         ];
 
         shellHook = ''
-          export LD_LIBRARY_PATH=${pkgs.nix-ld}/lib:$LD_LIBRARY_PATH
-          export NIX_LD=${pkgs.glibc}/lib/ld-linux-x86-64.so.2
           ./patch-workerd.sh
 
           export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
-          export PLAYWRIGHT_BROWSERS_PATH="${pkgs.playwright-driver.browsers}"
+          export PLAYWRIGHT_BROWSERS_PATH="${browsersPath}"
+
+          lefthook install
 
           echo "node: $(node -v)"
           echo "npm: $(npm -v)"
