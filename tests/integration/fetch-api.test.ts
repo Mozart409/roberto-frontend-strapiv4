@@ -1,3 +1,5 @@
+/// <reference types="vitest/globals" />
+
 import { http, HttpResponse } from "msw";
 
 import { fetchAPI } from "@/app/utils/fetch-api";

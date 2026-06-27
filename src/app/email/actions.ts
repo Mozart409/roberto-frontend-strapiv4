@@ -38,8 +38,7 @@ export async function createEmail(
 
   console.debug("Email", email);
 
-  const plaintext =
-    `Email from ${username} with email ${email}, subject: ${subject}, phone: ${phonenumber}, message: ${message.trim()}`;
+  const plaintext = `Email from ${username} with email ${email}, subject: ${subject}, phone: ${phonenumber}, message: ${message.trim()}`;
 
   try {
     const RESEND_API_KEY = process.env.RESEND_API_KEY;

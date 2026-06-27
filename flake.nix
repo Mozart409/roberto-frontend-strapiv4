@@ -27,7 +27,7 @@
       # Fix the upstream webkit package that fails because autoPatchelfHook
       # cannot find libenchant-2.so.2.
       webkitFixed = upstreamDriver.passthru.components.webkit.overrideAttrs (oldAttrs: {
-        buildInputs = oldAttrs.buildInputs ++ [ pkgs.enchant_2 ];
+        buildInputs = oldAttrs.buildInputs ++ [pkgs.enchant_2];
       });
 
       # Re-assemble the browsers bundle with the fixed webkit.
@@ -70,6 +70,7 @@
           keep-sorted
           lefthook
           ni
+          typescript
           nodejs_24
           opencode
           podman

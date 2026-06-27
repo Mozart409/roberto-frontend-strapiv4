@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "sourceMap": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -25,9 +21,7 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
@@ -43,14 +37,6 @@
     "global.d.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "open-next.config.ts",
-    "worker.ts"
-  ],
-  "types": [
-    "@cloudflare/workers-types/2024-07-29",
-    "node",
-    "vitest/globals"
-  ]
+  "exclude": ["node_modules", "open-next.config.ts", "worker.ts"],
+  "types": ["@cloudflare/workers-types/2024-07-29", "node", "vitest/globals"]
 }

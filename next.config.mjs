@@ -4,7 +4,12 @@ initOpenNextCloudflareForDev();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  allowedDevOrigins: ["local-origin.dev", "*.local-origin.dev", "localhost", "127.0.0.1"],
+  allowedDevOrigins: [
+    "local-origin.dev",
+    "*.local-origin.dev",
+    "localhost",
+    "127.0.0.1",
+  ],
   images: {
     remotePatterns: [
       {
@@ -15,7 +20,8 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "s3-images-idealcoachingfargate.s3.eu-central-1.amazonaws.com",
+        hostname:
+          "s3-images-idealcoachingfargate.s3.eu-central-1.amazonaws.com",
       },
       {
         protocol: "https",
