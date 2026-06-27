@@ -69,14 +69,17 @@ export default function Hero({ data }: HeroProps) {
         <div className="flex justify-center items-center p-6 mt-8 h-72 sm:h-80 lg:mt-0 lg:h-96 xl:h-112 2xl:h-128">
           <Image
             src={imgUrl || ""}
-            alt={data.picture.data.attributes.alternativeText || "none provided"}
+            alt={
+              data.picture.data.attributes.alternativeText || "none provided"
+            }
             className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
             width={600}
             height={600}
             style={{
-              maxWidth: "100%",
+              width: "100%",
               height: "auto",
             }}
+            priority
           />
         </div>
       </div>

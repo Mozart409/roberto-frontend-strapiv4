@@ -28,7 +28,7 @@ export default function LangRedirect() {
             width={600}
             height={600}
             style={{
-              maxWidth: "100%",
+              width: "100%",
               height: "auto",
             }}
           />

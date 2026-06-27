@@ -21,7 +21,7 @@ export default function Logo({
           width={45}
           height={45}
           style={{
-            maxWidth: "100%",
+            width: "100%",
             height: "auto",
           }}
         />

@@ -38,7 +38,7 @@ function Testimonial({ text, authorName, picture }: Testimonial) {
             width={200}
             height={200}
             style={{
-              maxWidth: "100%",
+              width: "100%",
               height: "auto",
             }}
           />
@@ -82,10 +82,7 @@ export default function Testimonials({ data }: TestimonialsProps) {
       </div>
       <div className="container grid grid-cols-1 gap-8 mx-auto md:px-10 md:pb-10 lg:grid-cols-2 lg:gap-20">
         {data.testimonials.map((testimonial: Testimonial, index: number) => (
-          <Testimonial
-            key={index}
-            {...testimonial}
-          />
+          <Testimonial key={index} {...testimonial} />
         ))}
       </div>
     </section>

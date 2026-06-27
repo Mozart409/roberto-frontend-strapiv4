@@ -25,7 +25,7 @@ export default function Media({ data }: { data: MediaProps }) {
         width={400}
         height={400}
         style={{
-          maxWidth: "100%",
+          width: "100%",
           height: "auto",
         }}
       />

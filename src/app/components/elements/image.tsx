@@ -26,7 +26,7 @@ const NextImage = ({ media, ...props }: CustomImageProps) => {
         width={Number.parseInt(props.width as string) || img?.width}
         height={Number.parseInt(props.height as string) || img?.height}
         style={{
-          maxWidth: "100%",
+          width: "100%",
           height: "auto",
         }}
       />
