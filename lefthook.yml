@@ -3,8 +3,24 @@ pre-commit:
   commands:
     biome:
       glob: "*.{js,ts,jsx,tsx}"
-      run: biome format --write {staged_files}
+      run: biome check --apply {staged_files}
       stage_fixed: true
+    typecheck:
+      glob: "*.{ts,tsx}"
+      run: tsc --noEmit
+
+pre-push:
+  parallel: false
+  commands:
+    lint:
+      run: biome check ./src
+    typecheck:
+      run: tsc --noEmit
+    build:
+      run: next build
+    e2e:
+      run: npm run test:e2e
+
 commit-msg:
   jobs:
     - name: cog verify
