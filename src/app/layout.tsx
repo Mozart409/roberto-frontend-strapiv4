@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
-import { fetchAPI } from "./utils/fetch-api";
-
-import { FALLBACK_SEO } from "@/app/utils/constants";
 
 import { Toaster } from "react-hot-toast";
+import { FALLBACK_SEO } from "@/app/utils/constants";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
+import { fetchAPI } from "./utils/fetch-api";
 
 async function getGlobal(lang: string) {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;

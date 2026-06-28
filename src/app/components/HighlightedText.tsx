@@ -27,5 +27,6 @@ export default function HighlightedText({
 
   result.push(`</${tag}>`);
 
+  // biome-ignore lint/security/noDangerouslySetInnerHtml: builds trusted markup from CMS-provided text to render inline highlights
   return <div dangerouslySetInnerHTML={{ __html: result.join("") }} />;
 }

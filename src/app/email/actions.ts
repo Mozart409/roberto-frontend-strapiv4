@@ -1,6 +1,7 @@
 "use server";
 
 import { z } from "zod";
+
 const EmailSchema = z.object({
   username: z.string().min(1, { message: "Name is required" }),
   email: z

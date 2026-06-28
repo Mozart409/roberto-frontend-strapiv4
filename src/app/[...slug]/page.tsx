@@ -1,7 +1,7 @@
+import type { Metadata } from "next";
 import { FALLBACK_SEO } from "@/app/utils/constants";
 import { getPageBySlug } from "@/app/utils/get-page-by-slug";
 import { sectionRenderer } from "@/app/utils/section-renderer";
-import type { Metadata } from "next";
 
 // Define props type
 type Props = {

@@ -50,7 +50,10 @@ function Testimonial({ text, authorName, picture }: Testimonial) {
           viewBox="0 0 512 512"
           fill="currentColor"
           className="absolute top-0 left-0 w-8 h-8 dark:text-gray-700"
+          role="img"
+          aria-hidden="true"
         >
+          <title>Opening quote</title>
           <path d="M232,246.857V16H16V416H54.4ZM48,48H200V233.143L48,377.905Z"></path>
           <path d="M280,416h38.4L496,246.857V16H280ZM312,48H464V233.143L312,377.905Z"></path>
         </svg>
@@ -60,7 +63,10 @@ function Testimonial({ text, authorName, picture }: Testimonial) {
           viewBox="0 0 512 512"
           fill="currentColor"
           className="absolute right-0 bottom-0 w-8 h-8 dark:text-gray-700"
+          role="img"
+          aria-hidden="true"
         >
+          <title>Closing quote</title>
           <path d="M280,185.143V416H496V16H457.6ZM464,384H312V198.857L464,54.1Z"></path>
           <path d="M232,16H193.6L16,185.143V416H232ZM200,384H48V198.857L200,54.1Z"></path>
         </svg>
@@ -81,8 +87,8 @@ export default function Testimonials({ data }: TestimonialsProps) {
         <p className="mt-4 text-lg text-center">{data.description}</p>
       </div>
       <div className="container grid grid-cols-1 gap-8 mx-auto md:px-10 md:pb-10 lg:grid-cols-2 lg:gap-20">
-        {data.testimonials.map((testimonial: Testimonial, index: number) => (
-          <Testimonial key={index} {...testimonial} />
+        {data.testimonials.map((testimonial: Testimonial) => (
+          <Testimonial key={testimonial.picture.data.id} {...testimonial} />
         ))}
       </div>
     </section>
