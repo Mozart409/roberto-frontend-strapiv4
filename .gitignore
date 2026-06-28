@@ -48,3 +48,4 @@ next-env.d.ts
 .vercel/
 .direnv/
 /.env.prod
+/.claude/settings.local.json

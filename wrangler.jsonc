@@ -2,8 +2,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
   "name": "roberto-frontend-strapiv4",
-  "compatibility_date": "2025-11-17",
-  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat"],
 
   "observability": {
     "logs": {
