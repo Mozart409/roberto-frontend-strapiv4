@@ -16,7 +16,7 @@ pre-push:
     typecheck:
       run: tsc --noEmit
     build:
-      run: next build
+      run: npm run build
     e2e:
       run: npm run test:e2e
     test:
