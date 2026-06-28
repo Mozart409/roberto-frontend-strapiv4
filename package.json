@@ -6,6 +6,7 @@
     "dev": "NODE_OPTIONS='--inspect=0' next dev --turbopack -H 0.0.0.0",
     "build": "next build",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "preview:dev": "CF_PREVIEW_DEV=true opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
