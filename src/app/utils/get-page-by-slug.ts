@@ -4,25 +4,10 @@ export async function getPageBySlug(slug: string, lang: string) {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
   const path = "/pages";
+  // Populate is intentionally omitted: the backend `page-populate-middleware`
+  // overrides the query and drives population itself, so anything sent here is
+  // discarded. We only need the slug filter and locale.
   const urlParamsObject = {
-    populate: [
-      "metadata.shareImage",
-      "favicon",
-      "notificationBanner.link",
-      "navbar.links",
-      "navbar.navbarLogo.logoImg",
-      "footer.footerLogo.logoImg",
-      "footer.menuLinks",
-      "footer.legalLinks",
-      "footer.socialLinks",
-      "footer.categories",
-      "gradientHero.seminarCard",
-      "list",
-      "seminarCard",
-      "features.link",
-      "features.media",
-      "features",
-    ],
     filters: {
       slug: {
         $eq: slug,

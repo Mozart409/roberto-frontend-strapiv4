@@ -1,5 +1,11 @@
 export function getStrapiURL(path = "") {
-  return `${process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337"}${path}`;
+  // Strip any trailing slash so a base like "http://localhost:1337/" doesn't
+  // produce "http://localhost:1337//api/..." (Strapi v5 rejects the double
+  // slash with a 400).
+  const base = (
+    process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337"
+  ).replace(/\/+$/, "");
+  return `${base}${path}`;
 }
 
 export function getStrapiMedia(url: string | null) {

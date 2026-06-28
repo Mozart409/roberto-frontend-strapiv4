@@ -7,7 +7,7 @@ export default async function RootRoute(props: {
 }) {
   const params = await props.params;
   try {
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: Strapi response is dynamic
     const page: any = await getPageBySlug("home", params.lang);
     if (page.error && page.error.status === 401) {
       throw new Error(
@@ -18,13 +18,13 @@ export default async function RootRoute(props: {
     if (page.data.length === 0 && params.lang !== "en") return <LangRedirect />;
     if (page.data.length === 0) return null;
     const contentSections = page.data[0].attributes.contentSections;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: Strapi sections are dynamic
     return contentSections.map((section: any, index: number) =>
       sectionRenderer(section, index),
     );
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: error type is dynamic
   } catch (error: any) {
     console.error(error);
-    window.alert("Missing or invalid credentials");
+    throw new Error(`Failed to load homepage: ${error.message ?? error}`);
   }
 }

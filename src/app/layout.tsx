@@ -20,19 +20,30 @@ async function getGlobal(lang: string) {
   const path = "/global";
   const options = { headers: { Authorization: `Bearer ${token}` } };
 
+  // Strapi v5 no longer accepts dot-notation populate strings; nested
+  // relations/components must be described as objects.
   const urlParamsObject = {
-    populate: [
-      "metadata.shareImage",
-      "favicon",
-      "notificationBanner.link",
-      "navbar.links",
-      "navbar.navbarLogo.logoImg",
-      "footer.footerLogo.logoImg",
-      "footer.menuLinks",
-      "footer.legalLinks",
-      "footer.socialLinks",
-      "footer.categories",
-    ],
+    populate: {
+      metadata: true,
+      favicon: true,
+      notificationBanner: { populate: { link: true } },
+      navbar: {
+        populate: {
+          links: true,
+          button: true,
+          navbarLogo: { populate: { logoImg: true } },
+        },
+      },
+      footer: {
+        populate: {
+          footerLogo: { populate: { logoImg: true } },
+          menuLinks: true,
+          legalLinks: true,
+          socialLinks: true,
+          categories: true,
+        },
+      },
+    },
     locale: lang,
   };
   return await fetchAPI(path, urlParamsObject, options);
@@ -121,7 +132,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           logoUrl={footerLogoUrl}
           logoText={footer.footerLogo.logoText}
           menuLinks={footer.menuLinks}
-          categoryLinks={footer.categories.data}
+          categoryLinks={footer.categories?.data ?? []}
           legalLinks={footer.legalLinks}
           socialLinks={footer.socialLinks}
         />
