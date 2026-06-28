@@ -11,6 +11,10 @@ const nextConfig = {
     "127.0.0.1",
   ],
   images: {
+    // Next 16 blocks optimizing images that resolve to a private IP (SSRF
+    // guard). The local Strapi lives on localhost, so allow it in dev only;
+    // prod talks to the public Strapi domain and must not carry this flag.
+    dangerouslyAllowLocalIP: process.env.NODE_ENV === "development",
     remotePatterns: [
       {
         protocol: "http",
