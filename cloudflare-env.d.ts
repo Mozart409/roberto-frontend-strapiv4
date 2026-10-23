@@ -3,6 +3,7 @@
 // Runtime types generated with workerd@1.20260617.1 2025-11-17 global_fetch_strictly_public,nodejs_compat
 interface __BaseEnv_CloudflareEnv {
   ASSETS: Fetcher;
+  IMAGES: ImagesBinding;
   NODE_VERSION: "22";
   NEXT_PUBLIC_STRAPI_API_TOKEN: string;
   NEXT_PUBLIC_PAGE_LIMIT: string;

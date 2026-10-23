@@ -31,6 +31,10 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  // Cloudflare Images binding; OpenNext uses it to back `/_next/image`.
+  "images": {
+    "binding": "IMAGES"
+  },
   "r2_buckets": [
     // Create a R2 binding with the binding name "NEXT_INC_CACHE_R2_BUCKET"
     // {
