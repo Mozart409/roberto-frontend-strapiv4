@@ -1,0 +1,38 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    # Matches min-release-age=7 in the local ~/.npmrc.
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 5
+    groups:
+      # Next and the OpenNext adapter must move together (Next 16.4 on
+      # OpenNext 1.20.1 threw Worker error 1101 on every request), and newer
+      # OpenNext needs a matching wrangler/workerd.
+      cloudflare-stack:
+        patterns:
+          - "next"
+          - "@opennextjs/*"
+          - "wrangler"
+      dev-dependencies:
+        dependency-type: development
+        update-types: [minor, patch]
+      production-dependencies:
+        dependency-type: production
+        update-types: [minor, patch]
+    ignore:
+      # Majors need a manual migration (Tailwind 4, Next 17, ...).
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]
