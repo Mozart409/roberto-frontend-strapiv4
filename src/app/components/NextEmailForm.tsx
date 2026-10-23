@@ -1,7 +1,8 @@
 "use client";
 
 import Form from "next/form";
-import { useActionState, useEffect } from "react";
+import Script from "next/script";
+import { useActionState, useCallback, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { createEmail } from "../email/actions";
 import { renderButtonStyle } from "../utils/render-button-style";
@@ -22,15 +23,49 @@ const initialState = {
   type: "",
 };
 
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (el: HTMLElement, options: { sitekey: string }) => string;
+      reset: (widgetId: string) => void;
+      remove: (widgetId: string) => void;
+    };
+  }
+}
+
 export function NextEmailForm({ data }: { data: EmailProps }) {
   const [state, formAction, pending] = useActionState(
     createEmail,
     initialState,
   );
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetId = useRef<string | null>(null);
+
+  // Explicit rendering so the widget also appears after client-side navigation.
+  const renderTurnstile = useCallback(() => {
+    if (!window.turnstile || !turnstileRef.current || widgetId.current) return;
+    widgetId.current = window.turnstile.render(turnstileRef.current, {
+      sitekey: TURNSTILE_SITE_KEY,
+    });
+  }, []);
+
+  useEffect(() => {
+    renderTurnstile();
+    return () => {
+      if (widgetId.current) window.turnstile?.remove(widgetId.current);
+      widgetId.current = null;
+    };
+  }, [renderTurnstile]);
 
   useEffect(() => {
     if (state.type === "success") toast.success(state.message);
     if (state.type === "error") toast.error(state.message);
+    // Turnstile tokens are single-use; get a fresh one for the next submit.
+    if (state.type && widgetId.current) {
+      window.turnstile?.reset(widgetId.current);
+    }
   }, [state]);
 
   return (
@@ -95,6 +130,8 @@ export function NextEmailForm({ data }: { data: EmailProps }) {
             />
           </div>
 
+          <div className="mt-2" ref={turnstileRef} />
+
           <button
             disabled={pending}
             type="submit"
@@ -103,6 +140,10 @@ export function NextEmailForm({ data }: { data: EmailProps }) {
             {data.submitButton.text}
           </button>
         </Form>
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+          onReady={renderTurnstile}
+        />
       </section>
     </>
   );

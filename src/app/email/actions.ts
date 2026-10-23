@@ -3,14 +3,15 @@
 import { z } from "zod";
 
 const EmailSchema = z.object({
-  username: z.string().min(1, { message: "Name is required" }),
+  username: z.string().min(1, { message: "Name is required" }).max(200),
   email: z
     .string()
     .email({ message: "Email is not valid" })
-    .min(1, { message: "Email is required" }),
-  phonenumber: z.string().optional(),
-  subject: z.string().min(1, { message: "Subject is required" }),
-  message: z.string().min(1, { message: "Message is required" }),
+    .min(1, { message: "Email is required" })
+    .max(320),
+  phonenumber: z.string().max(50).optional(),
+  subject: z.string().min(1, { message: "Subject is required" }).max(300),
+  message: z.string().min(1, { message: "Message is required" }).max(10000),
 });
 
 export type EmailSchema = z.infer<typeof EmailSchema>;
@@ -18,12 +19,44 @@ export type EmailSchema = z.infer<typeof EmailSchema>;
 const SEND_ERROR =
   "Ihre Nachricht konnte leider nicht gesendet werden. Bitte versuchen Sie es später erneut.";
 
+async function verifyTurnstile(token: FormDataEntryValue | null) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) {
+    console.error("TURNSTILE_SECRET_KEY is not set");
+    return false;
+  }
+  if (typeof token !== "string" || !token) return false;
+
+  const res = await fetch(
+    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ secret, response: token }),
+    },
+  );
+  const outcome: { success: boolean; "error-codes"?: string[] } =
+    await res.json();
+  if (!outcome.success) {
+    console.error("Turnstile rejected", outcome["error-codes"]);
+  }
+  return outcome.success;
+}
+
 export async function createEmail(
   prevState: {
     message: string;
   },
   formData: FormData,
 ) {
+  if (!(await verifyTurnstile(formData.get("cf-turnstile-response")))) {
+    return {
+      message:
+        "Die Sicherheitsprüfung ist fehlgeschlagen. Bitte erneut versuchen.",
+      type: "error",
+    };
+  }
+
   const parse = EmailSchema.safeParse({
     username: formData.get("username"),
     email: formData.get("email"),
@@ -31,8 +64,6 @@ export async function createEmail(
     subject: formData.get("subject"),
     message: formData.get("message"),
   });
-
-  console.debug("formData", formData);
 
   if (!parse.success) {
     console.error("Schema parse failed", parse.error);
@@ -43,8 +74,6 @@ export async function createEmail(
   }
 
   const { username, email, phonenumber, subject, message } = parse.data;
-
-  console.debug("Email", email);
 
   const plaintext = `Email from ${username} with email ${email}, subject: ${subject}, phone: ${phonenumber}, message: ${message.trim()}`;
 
