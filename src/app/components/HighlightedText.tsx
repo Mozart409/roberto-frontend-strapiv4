@@ -1,3 +1,5 @@
+import { type ElementType, Fragment } from "react";
+
 interface HighlightedTextProps {
   text: string;
   tag: string;
@@ -5,28 +7,32 @@ interface HighlightedTextProps {
   color?: string;
 }
 
+// Renders CMS text, wrapping `[word]` in a highlight span. Built from React
+// elements (not innerHTML) so CMS content is always escaped.
 export default function HighlightedText({
   text,
   tag,
   className,
   color,
 }: HighlightedTextProps) {
-  const tempText = text.split(" ");
-  const result = [];
+  const Tag = tag as ElementType;
 
-  result.push(`<${tag} class="${className ? className : ""}">`);
-
-  tempText.forEach((word: string, index: number) => {
-    if (word.includes("[")) {
-      const highlight = word.replace("[", "").replace("]", "");
-      result.push(
-        `<span key=${index} class="${color ? color : ""}">${highlight}</span> `,
-      );
-    } else result.push(word + " ");
-  });
-
-  result.push(`</${tag}>`);
-
-  // biome-ignore lint/security/noDangerouslySetInnerHtml: builds trusted markup from CMS-provided text to render inline highlights
-  return <div dangerouslySetInnerHTML={{ __html: result.join("") }} />;
+  return (
+    <div>
+      <Tag className={className ?? ""}>
+        {text.split(" ").map((word, index) =>
+          word.includes("[") ? (
+            // biome-ignore lint/suspicious/noArrayIndexKey: words can repeat and never reorder
+            <Fragment key={index}>
+              <span className={color ?? ""}>
+                {word.replace("[", "").replace("]", "")}
+              </span>{" "}
+            </Fragment>
+          ) : (
+            `${word} `
+          ),
+        )}
+      </Tag>
+    </div>
+  );
 }
