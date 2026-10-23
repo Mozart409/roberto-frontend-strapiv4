@@ -43,6 +43,10 @@ export async function createEmail(
 
   try {
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
+    if (!RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not set");
+      return { message: "Failed to send email (missing key)", type: "error" };
+    }
 
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -53,6 +57,7 @@ export async function createEmail(
       body: JSON.stringify({
         from: "hallo@ideal-coaching.com",
         to: ["roberto.morbio@ideal-coaching.de"],
+        reply_to: email,
         subject: subject,
         tags: [
           {
@@ -60,11 +65,13 @@ export async function createEmail(
             value: "strapi_email",
           },
         ],
-        html: plaintext,
+        // Plain text so user input can't inject markup into the email.
+        text: plaintext,
       }),
     });
 
     if (!res.ok) {
+      console.error("Resend error", res.status, await res.text());
       return { message: `Failed to send email ${res.status}`, type: "error" };
     }
 
