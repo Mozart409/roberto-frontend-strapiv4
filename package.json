@@ -52,10 +52,15 @@
     "knip": "^5.71.0",
     "msw": "^2.11.1",
     "typescript": "5.9.3",
-    "vitest": "^3.2.4",
+    "vitest": "4.1.12",
     "wrangler": "^4.151.1"
   },
   "engines": {
     "node": ">=22.x.x"
+  },
+  "overrides": {
+    "@node-minify/core": {
+      "glob": "^10.5.0"
+    }
   }
 }
