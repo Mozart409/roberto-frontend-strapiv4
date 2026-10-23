@@ -15,7 +15,9 @@
         pkgs,
         system,
         ...
-      }: {
+      }: let
+        wrangler = inputs.wrangler-flake.packages.${system}.wrangler;
+      in {
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           config.allowUnfree = true;
@@ -41,11 +43,16 @@
             python3
             typescript
             # wrangler
-            inputs.wrangler-flake.packages.${system}.wrangler
+            wrangler
             # keep-sorted end
           ];
 
           shellHook = ''
+            # The npm prebuilt workerd doesn't run on NixOS; point miniflare at
+            # the autopatched one bundled with the wrangler flake.
+            export MINIFLARE_WORKERD_PATH="$(find ${wrangler}/lib/node_modules \
+              -path '*/@cloudflare/workerd-*/bin/workerd' | head -1)"
+
             lefthook install
 
             echo "node: $(node -v)"
