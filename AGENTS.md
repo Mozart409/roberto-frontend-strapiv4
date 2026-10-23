@@ -48,10 +48,18 @@ npm run t             # TypeScript compiler in watch mode
 ```
 
 ### Testing
-**NO TESTING FRAMEWORK CURRENTLY CONFIGURED**
-- Playwright is available via Nix flake but not configured
-- To add tests: Configure Playwright or Vitest
-- Run single test (when configured): `npm test <filename>`
+```bash
+npm run test          # Vitest integration tests (tests/integration, MSW mocks)
+npm run test:e2e      # Playwright e2e tests (tests/e2e, builds and starts Next)
+npm test <filename>   # Run a single Vitest file
+```
+
+**When you change page code, update the tests.** Any change to pages,
+layouts, error/not-found pages, components, server actions or Strapi fetching
+must update the matching tests in `tests/integration` or `tests/e2e` in the
+same commit (e.g. changed UI text that a test asserts on). The lefthook
+pre-push hook runs lint, typecheck, build, e2e and unit tests, so stale tests
+block the push.
 
 ### Cloudflare Utilities
 ```bash
@@ -262,7 +270,7 @@ export type EmailSchema = z.infer<typeof Schema>;
 - **Node.js Version**: >=22.x.x (provided by Nix flake)
 - **Package Manager**: Use `npm` (not pnpm or yarn)
 - **State Management**: No global state library (use React hooks/context)
-- **Testing**: Not yet configured (Playwright available in Nix flake)
+- **Testing**: Vitest (integration) + Playwright (e2e); keep them in sync with page changes
 - **Deployment Target**: Cloudflare Workers/Pages
 - **CMS Integration**: All content from Strapi v4
 
