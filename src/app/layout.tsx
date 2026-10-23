@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { FALLBACK_SEO } from "@/app/utils/constants";
 import Banner from "./components/Banner";
+import ErrorState from "./components/ErrorState";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
@@ -75,13 +76,20 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const global: any = await getGlobal(lang);
   if (!global.data) {
+    console.error("Failed to load global settings from Strapi", global.error);
     return (
       <html lang={lang}>
         <body>
-          <main className="flex flex-col px-4 min-h-screen dark:text-gray-100 dark:bg-black">
-            <div className="px-4 sm:px-6 lg:px-8">
-              <h1 className="text-3xl text-red-500">Error</h1>
-            </div>
+          <main className="flex flex-col min-h-screen dark:text-gray-100 dark:bg-black">
+            <ErrorState
+              code={
+                global.error?.status
+                  ? `Fehler ${global.error.status}`
+                  : undefined
+              }
+              title="Die Seite ist gerade nicht erreichbar"
+              description="Die Inhalte konnten nicht geladen werden. Bitte versuchen Sie es in ein paar Minuten erneut."
+            />
           </main>
         </body>
       </html>
