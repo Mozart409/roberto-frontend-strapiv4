@@ -17,6 +17,7 @@
         ...
       }: let
         wrangler = inputs.wrangler-flake.packages.${system}.wrangler;
+        dynamicLinker = "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
       in {
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
@@ -48,10 +49,21 @@
           ];
 
           shellHook = ''
-            # The npm prebuilt workerd doesn't run on NixOS; point miniflare at
-            # the autopatched one bundled with the wrangler flake.
-            export MINIFLARE_WORKERD_PATH="$(find ${wrangler}/lib/node_modules \
-              -path '*/@cloudflare/workerd-*/bin/workerd' | head -1)"
+            # The npm prebuilt workerd expects an FHS loader. Point it at the
+            # Nix one so miniflare runs the exact workerd that wrangler pins
+            # (the wrangler flake's bundled workerd lags behind). Re-enter the
+            # shell after `npm install`, which restores the unpatched binary.
+            if [ "$(uname -s)" = Linux ]; then
+              find node_modules -path '*/@cloudflare/workerd-linux-*/bin/workerd' \
+                -type f 2>/dev/null | while read -r bin; do
+                ${pkgs.patchelf}/bin/patchelf \
+                  --set-interpreter "$(cat ${dynamicLinker})" "$bin"
+              done
+            fi
+
+            # stdenv sets SSL_CERT_FILE to a dummy path; workerd then trusts no
+            # CA and every outbound fetch fails TLS verification.
+            export SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
 
             lefthook install
 
