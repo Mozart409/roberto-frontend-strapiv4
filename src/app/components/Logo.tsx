@@ -18,11 +18,14 @@ export default function Logo({
         <Image
           src={src}
           alt="logo"
-          width={45}
-          height={45}
+          // Intrinsic size only drives the srcset; CSS caps the rendered
+          // height to the navbar and keeps the aspect ratio.
+          width={240}
+          height={120}
+          preload
           style={{
-            width: "100%",
-            height: "auto",
+            width: "auto",
+            height: "3.5rem",
           }}
         />
       )}
