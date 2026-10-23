@@ -32,5 +32,5 @@ test("unknown route shows not found content", async ({ request }) => {
   // because the route pattern matches (catch-all) even though content doesn't exist
   expect(response.status()).toBe(200);
   const body = await response.text();
-  expect(body).toContain("404 Content not found!");
+  expect(body).toContain("Seite nicht gefunden");
 });
