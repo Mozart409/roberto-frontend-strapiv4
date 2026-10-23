@@ -12,7 +12,7 @@ pre-push:
   parallel: false
   commands:
     lint:
-      run: biome check ./src
+      run: biome check ./src ./tests
     typecheck:
       run: tsc --noEmit
     build:

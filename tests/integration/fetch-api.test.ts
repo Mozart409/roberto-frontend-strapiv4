@@ -1,6 +1,6 @@
 /// <reference types="vitest/globals" />
 
-import { http, HttpResponse } from "msw";
+import { HttpResponse, http } from "msw";
 
 import { fetchAPI } from "@/app/utils/fetch-api";
 import { server } from "../setup/msw";

@@ -1,6 +1,6 @@
 /// <reference types="vitest/globals" />
 
-import { http, HttpResponse } from "msw";
+import { HttpResponse, http } from "msw";
 
 import { createEmail } from "@/app/email/actions";
 import { server } from "../setup/msw";

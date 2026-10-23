@@ -13,7 +13,7 @@
     "fix": "biome format --write ./src",
     "t": "tsc -w",
     "knip": "knip",
-    "lint": "biome check",
+    "lint": "biome check ./src ./tests",
     "postinstall": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -45,7 +45,7 @@
     "zod": "^4.1.13"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.8",
+    "@biomejs/biome": "2.5.15",
     "@playwright/test": "^1.55.0",
     "@types/mocha": "10.0.10",
     "@types/node": "24.10.1",
