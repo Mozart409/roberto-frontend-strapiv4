@@ -28,6 +28,11 @@ export function NextEmailForm({ data }: { data: EmailProps }) {
     initialState,
   );
 
+  useEffect(() => {
+    if (state.type === "success") toast.success(state.message);
+    if (state.type === "error") toast.error(state.message);
+  }, [state]);
+
   return (
     <>
       <section className="py-6 mx-auto w-full max-w-4xl dark:text-gray-50 dark:bg-black">
@@ -40,11 +45,6 @@ export function NextEmailForm({ data }: { data: EmailProps }) {
 
         <Form action={formAction}>
           <div className="mt-2">
-            {state?.message && (
-              <p className="text-black font-bold text-xl" aria-live="polite">
-                {state.message}
-              </p>
-            )}
             <input
               className="block py-1.5 w-full text-gray-900 rounded-md border-0 ring-1 ring-inset ring-gray-300 shadow-sm sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset placeholder:text-gray-400 focus:ring-primary-600"
               type="text"

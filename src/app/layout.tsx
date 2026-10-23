@@ -136,7 +136,15 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           socialLinks={footer.socialLinks}
         />
 
-        <Toaster toastOptions={{ duration: 7000 }} />
+        <Toaster
+          toastOptions={{
+            duration: 7000,
+            // Plain `toast()` is info; type options replace this className.
+            className: "border-2 border-blue-500",
+            success: { className: "border-2 border-green-500" },
+            error: { className: "border-2 border-red-500" },
+          }}
+        />
       </body>
     </html>
   );

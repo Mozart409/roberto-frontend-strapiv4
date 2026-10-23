@@ -15,6 +15,9 @@ const EmailSchema = z.object({
 
 export type EmailSchema = z.infer<typeof EmailSchema>;
 
+const SEND_ERROR =
+  "Ihre Nachricht konnte leider nicht gesendet werden. Bitte versuchen Sie es später erneut.";
+
 export async function createEmail(
   prevState: {
     message: string;
@@ -32,7 +35,11 @@ export async function createEmail(
   console.debug("formData", formData);
 
   if (!parse.success) {
-    return { message: `Schema parse failed ${parse.error}`, type: "error" };
+    console.error("Schema parse failed", parse.error);
+    return {
+      message: "Bitte füllen Sie alle Pflichtfelder korrekt aus.",
+      type: "error",
+    };
   }
 
   const { username, email, phonenumber, subject, message } = parse.data;
@@ -45,7 +52,7 @@ export async function createEmail(
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
     if (!RESEND_API_KEY) {
       console.error("RESEND_API_KEY is not set");
-      return { message: "Failed to send email (missing key)", type: "error" };
+      return { message: SEND_ERROR, type: "error" };
     }
 
     const res = await fetch("https://api.resend.com/emails", {
@@ -72,13 +79,15 @@ export async function createEmail(
 
     if (!res.ok) {
       console.error("Resend error", res.status, await res.text());
-      return { message: `Failed to send email ${res.status}`, type: "error" };
+      return { message: SEND_ERROR, type: "error" };
     }
 
-    const data = await res.json();
-
-    return { message: `Send email`, type: "success" };
+    return {
+      message: "Vielen Dank! Ihre Nachricht wurde gesendet.",
+      type: "success",
+    };
   } catch (e) {
-    return { message: `Failed to send email ${e}`, type: "error" };
+    console.error("Failed to send email", e);
+    return { message: SEND_ERROR, type: "error" };
   }
 }
