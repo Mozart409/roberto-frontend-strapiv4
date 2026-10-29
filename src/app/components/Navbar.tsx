@@ -67,7 +67,7 @@ export default function Navbar({
     setMobileMenuOpen(false);
   };
   return (
-    <div className="p-4 dark:text-gray-100 dark:bg-black">
+    <header className="p-4 dark:text-gray-100 dark:bg-black">
       <div className="container flex justify-between px-0 mx-auto h-16 sm:px-6 md:justify-center">
         <Logo src={logoUrl}>
           {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
@@ -139,6 +139,7 @@ export default function Navbar({
           className="p-4 lg:hidden"
           onClick={() => setMobileMenuOpen(true)}
         >
+          <span className="sr-only">Open menu</span>
           <div className="w-7 h-7 text-gray-800" aria-hidden="true">
             {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
             <svg
@@ -160,6 +161,6 @@ export default function Navbar({
           </div>
         </button>
       </div>
-    </div>
+    </header>
   );
 }

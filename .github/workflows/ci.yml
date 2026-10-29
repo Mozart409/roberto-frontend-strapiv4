@@ -73,9 +73,12 @@ jobs:
         if: steps.token.outputs.present == 'true'
         run: npm ci
 
+      - name: Install Playwright Chromium
+        if: steps.token.outputs.present == 'true'
+        run: npx playwright install --with-deps chromium
+
       # Playwright's webServer runs `next build && next start`, so this step
-      # is also the build check. The specs only use the request fixture, so
-      # no browsers are installed.
+      # is also the build check.
       - name: Run E2E tests
         if: steps.token.outputs.present == 'true'
         run: npm run test:e2e
