@@ -71,8 +71,7 @@ src/
 │   ├── components/     # Reusable components (Hero, Navbar, Footer, etc.)
 │   ├── email/          # Email handling
 │   ├── utils/          # Utility functions and API helpers
-│   └── [...slug]/      # Dynamic routing for CMS pages
-├── middleware.ts       # i18n middleware
+│   └── [...slug]/      # CMS pages, prerendered at build time
 └── i18n-config.ts      # Internationalization configuration
 ```
 
