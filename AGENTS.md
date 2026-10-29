@@ -54,17 +54,51 @@ npm run test:e2e      # Playwright e2e tests (tests/e2e, builds and starts Next)
 npm test <filename>   # Run a single Vitest file
 ```
 
+E2E (Playwright) is the primary and preferred testing mechanism; see
+[Testing Philosophy](#testing-philosophy).
+
 **When you change page code, update the tests.** Any change to pages,
 layouts, error/not-found pages, components, server actions or Strapi fetching
-must update the matching tests in `tests/integration` or `tests/e2e` in the
-same commit (e.g. changed UI text that a test asserts on). The lefthook
-pre-push hook runs lint, typecheck, build, e2e and unit tests, so stale tests
-block the push.
+must update the matching test in `tests/e2e` in the same commit (e.g. changed
+UI text that a test asserts on). The lefthook pre-push hook runs lint,
+typecheck, build, e2e and unit tests, so stale tests block the push.
+
+`tests/integration` (Vitest + MSW) is legacy coverage that still runs in CI:
+keep existing suites green when you touch the code they cover, but do not add
+new integration or unit tests to cover new behavior — new behavior is verified
+in `tests/e2e` per the Testing Philosophy below.
 
 ### Cloudflare Utilities
 ```bash
 npm run cf-typegen    # Generate Cloudflare environment types
 ```
+
+## Testing Philosophy
+
+- **NEVER write unit tests after you write code.** Unit tests written after the
+  fact tend to just re-describe the implementation rather than verify
+  behavior.
+- **Highly prefer E2E tests as the sole testing mechanism.** Use them to
+  verify complex features work end-to-end. At the end of an E2E test, produce
+  a verifiable and repeatable artifact (e.g. a downloaded/verified file, a
+  persisted DB row, an API response fixture) rather than just asserting a
+  process exited cleanly.
+- **If you must test a system in isolation**, first write down all the ways
+  it could fail, *then* write the code to guard against those failure modes.
+  Do not write the code first and backfill unit tests against it.
+- **When writing an E2E test, don't pick the simplest possible scenario to
+  prove the happy path works.** Pick a medium-to-hard scenario when verifying
+  the work.
+- **NEVER loosen an assertion to make a failing test pass.** Widening an
+  expected value (`== Pending` to `Pending | Downloading`), switching to a
+  negative check (`!= X`), adding a tolerance or retry, or marking a test
+  `#[ignore]` all hide the failure instead of explaining it. When a test
+  fails, find out whether the code or the test is wrong. If the test is
+  racy, make it deterministic (pause the module under test, seed the state
+  directly, poll a bounded condition) rather than accept every outcome. If
+  loosening really is the right call, stop: explain to the user why, what
+  the weaker assertion no longer catches, and what the alternatives are,
+  and wait for their approval before changing it.
 
 ## Project Architecture
 
