@@ -61,6 +61,10 @@
               done
             fi
 
+            # Same loader problem for the npm prebuilt biome; its launcher
+            # honours BIOME_BINARY, so point it at the Nix build (same version).
+            export BIOME_BINARY=${pkgs.biome}/bin/biome
+
             # stdenv sets SSL_CERT_FILE to a dummy path; workerd then trusts no
             # CA and every outbound fetch fails TLS verification.
             export SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
