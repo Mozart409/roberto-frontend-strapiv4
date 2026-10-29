@@ -65,6 +65,13 @@
             # honours BIOME_BINARY, so point it at the Nix build (same version).
             export BIOME_BINARY=${pkgs.biome}/bin/biome
 
+            # Playwright's downloaded browsers don't run on NixOS either; use
+            # the nixpkgs build, which must match @playwright/test's version.
+            ${pkgs.lib.optionalString pkgs.stdenv.hostPlatform.isLinux ''
+              export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}
+              export PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=true
+            ''}
+
             # stdenv sets SSL_CERT_FILE to a dummy path; workerd then trusts no
             # CA and every outbound fetch fails TLS verification.
             export SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
