@@ -5,7 +5,15 @@
   "compatibility_date": "2026-06-01",
   "compatibility_flags": ["nodejs_compat"],
 
+  // Keep in sync with the dashboard so deploys don't reset it. The dashboard
+  // calls the issues setting `issue_detection`; wrangler's key is `issues`.
   "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+    "redact_query_string": false,
+    "issues": {
+      "enabled": true
+    },
     "logs": {
       "enabled": true,
       "head_sampling_rate": 0.25,
