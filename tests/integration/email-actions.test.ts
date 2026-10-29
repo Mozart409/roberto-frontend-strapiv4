@@ -42,14 +42,13 @@ function mockTurnstile(success: boolean) {
 
 describe("createEmail", () => {
   beforeEach(() => {
-    process.env.RESEND_API_KEY = "test-key";
-    process.env.TURNSTILE_SECRET_KEY = "turnstile-secret";
+    vi.stubEnv("RESEND_API_KEY", "test-key");
+    vi.stubEnv("TURNSTILE_SECRET_KEY", "turnstile-secret");
     mockTurnstile(true);
   });
 
   afterEach(() => {
-    delete process.env.RESEND_API_KEY;
-    delete process.env.TURNSTILE_SECRET_KEY;
+    vi.unstubAllEnvs();
   });
 
   it("returns success when Resend accepts the email", async () => {

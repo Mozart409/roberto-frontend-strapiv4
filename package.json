@@ -61,6 +61,9 @@
   "overrides": {
     "@node-minify/core": {
       "glob": "^10.5.0"
+    },
+    "@tailwindcss/typography": {
+      "postcss-selector-parser": "^6.1.5"
     }
   }
 }
