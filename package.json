@@ -48,7 +48,7 @@
     "@biomejs/biome": "2.5.15",
     "@playwright/test": "^1.55.0",
     "@types/mocha": "10.0.10",
-    "@types/node": "24.10.1",
+    "@types/node": "24.19.2",
     "knip": "^5.71.0",
     "msw": "^2.11.1",
     "typescript": "5.9.3",
