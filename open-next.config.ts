@@ -1,9 +1,10 @@
-// default open-next.config.ts file created by @opennextjs/cloudflare
 import { defineCloudflareConfig } from "@opennextjs/cloudflare/config";
-// import r2IncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/r2-incremental-cache";
+import staticAssetsIncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/static-assets-incremental-cache";
 
-export default defineCloudflareConfig(
-  /* {
-  incrementalCache: r2IncrementalCache,
-} */
-);
+// All pages are prerendered at build time (no ISR), so serve them read-only
+// from Workers static assets. Without an incremental cache OpenNext re-renders
+// every request and the site goes down whenever Strapi does.
+export default defineCloudflareConfig({
+  incrementalCache: staticAssetsIncrementalCache,
+  enableCacheInterception: true,
+});

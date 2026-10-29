@@ -281,7 +281,7 @@ RESEND_API_KEY=<your_key>
 ### Internationalization (i18n)
 - Configured for `en` and `de` locales
 - Currently hardcoded to `"de"` in many places
-- Middleware disabled (transitional state)
+- No middleware (the no-op i18n one was removed)
 - Pass locale to Strapi API calls
 
 ### Styling (TailwindCSS)

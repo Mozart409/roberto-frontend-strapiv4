@@ -27,10 +27,9 @@ test("png asset is served", async ({ request }) => {
 test("unknown route shows not found content", async ({ request }) => {
   const response = await request.get("/missing-route-123");
 
-  // In a CMS-driven architecture with catch-all routing,
-  // unknown routes render the not-found page with 200 status
-  // because the route pattern matches (catch-all) even though content doesn't exist
-  expect(response.status()).toBe(200);
+  // CMS pages are prerendered with `dynamicParams = false`, so a slug that
+  // isn't in Strapi is a real 404 rather than an on-demand render.
+  expect(response.status()).toBe(404);
   const body = await response.text();
   expect(body).toContain("Seite nicht gefunden");
 });
