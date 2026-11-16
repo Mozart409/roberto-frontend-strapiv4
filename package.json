@@ -22,10 +22,10 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
-    "@opennextjs/cloudflare": "^1.20.15",
+    "@opennextjs/cloudflare": "^1.20.16",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.10",
-    "@tailwindcss/postcss": "^4.1.17",
+    "@tailwindcss/postcss": "^4.3.5",
     "@tailwindcss/typography": "^0.5.19",
     "@types/qs": "^6.14.0",
     "@types/react": "19.3.0",
