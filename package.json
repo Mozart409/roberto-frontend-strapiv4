@@ -45,15 +45,15 @@
     "zod": "^4.1.13"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.6.6",
-    "@playwright/test": "^1.65.0",
+    "@biomejs/biome": "2.6.8",
+    "@playwright/test": "^1.65.1",
     "@types/mocha": "10.0.10",
     "@types/node": "24.19.2",
     "knip": "^5.71.0",
     "msw": "^2.11.1",
     "typescript": "5.9.3",
     "vitest": "4.1.12",
-    "wrangler": "^4.158.0"
+    "wrangler": "^4.163.0"
   },
   "engines": {
     "node": ">=22.x.x"
